@@ -14,3 +14,4 @@
 local.properties
 
 /app/release
+/app/src/main/assets/AppstoreAuthenticationKey.pem
