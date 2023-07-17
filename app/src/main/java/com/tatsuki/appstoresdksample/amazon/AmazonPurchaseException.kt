@@ -5,4 +5,6 @@ sealed class AmazonPurchaseException : Exception() {
   object NotSupportedException : AmazonPurchaseException()
 
   object GetUserDataFailedException : AmazonPurchaseException()
+
+  object GetProductDataFailedException : AmazonPurchaseException()
 }
