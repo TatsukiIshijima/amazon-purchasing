@@ -3,6 +3,7 @@ package com.tatsuki.appstoresdksample.amazon
 import android.content.Context
 import com.amazon.device.iap.PurchasingListener
 import com.amazon.device.iap.PurchasingService
+import com.amazon.device.iap.model.FulfillmentResult
 import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.ProductDataResponse
 import com.amazon.device.iap.model.PurchaseResponse
@@ -180,6 +181,10 @@ class AmazonPurchasingServiceImpl @Inject constructor(
 
   override fun onPurchaseResponse(purchaseResponse: PurchaseResponse?) {
     onPurchaseListenerMap[requestPurchaseId]?.onPurchase(purchaseResponse)
+  }
+
+  override fun notifyFulfillment(receiptId: String, fulfillmentResult: FulfillmentResult) {
+    PurchasingService.notifyFulfillment(receiptId, fulfillmentResult)
   }
 
   override fun onPurchaseUpdatesResponse(p0: PurchaseUpdatesResponse?) {
