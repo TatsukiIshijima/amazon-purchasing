@@ -3,6 +3,7 @@ package com.tatsuki.appstoresdksample
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.UserData
 import com.tatsuki.appstoresdksample.amazon.AmazonPurchasingService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +22,9 @@ class MainViewModel @Inject constructor(
   private val mutableUserDataFlow: MutableStateFlow<UserData?> = MutableStateFlow(null)
   val userDataFlow = mutableUserDataFlow.asStateFlow()
 
+  private val mutableProductsFlow: MutableStateFlow<List<Product>> = MutableStateFlow(emptyList())
+  val productsFlow = mutableProductsFlow.asStateFlow()
+
   fun registerPurchasingService() {
     amazonPurchasingService.registerPurchasingService()
   }
@@ -30,6 +34,18 @@ class MainViewModel @Inject constructor(
       invoke {
         val userData = amazonPurchasingService.getUserData()
         mutableUserDataFlow.value = userData
+      }
+    }
+  }
+
+  fun getProductData() {
+    viewModelScope.launch {
+      invoke {
+        val productSkus = HashSet<String>()
+        productSkus.add(SUBSCRIPTION_ITEM_TEST_SKU)
+        val products = amazonPurchasingService.getProductData(productSkus)
+          .map { product -> product.value }
+        mutableProductsFlow.value = products
       }
     }
   }
@@ -45,5 +61,7 @@ class MainViewModel @Inject constructor(
 
   companion object {
     private val TAG = MainViewModel::class.java.simpleName
+
+    private val SUBSCRIPTION_ITEM_TEST_SKU = "subscription_item_test"
   }
 }

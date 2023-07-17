@@ -36,6 +36,12 @@ class MainActivity : ComponentActivity() {
         .onEach {
           Log.d(TAG, "UserData=$it")
         }.launchIn(lifecycleScope)
+
+      productsFlow
+        .onEach {
+          Log.d(TAG, "Products=$it")
+        }
+        .launchIn(lifecycleScope)
     }
 
     setContent {
@@ -51,7 +57,10 @@ class MainActivity : ComponentActivity() {
   override fun onResume() {
     super.onResume()
 
-    mainViewModel.getUserData()
+    with(mainViewModel) {
+      getUserData()
+      getProductData()
+    }
   }
 
   companion object {
