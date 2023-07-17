@@ -3,6 +3,7 @@ package com.tatsuki.appstoresdksample.amazon
 import android.content.Context
 import com.amazon.device.iap.PurchasingListener
 import com.amazon.device.iap.PurchasingService
+import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.ProductDataResponse
 import com.amazon.device.iap.model.PurchaseResponse
 import com.amazon.device.iap.model.PurchaseUpdatesResponse
@@ -20,8 +21,11 @@ class AmazonPurchasingServiceImpl @Inject constructor(
 ) : AmazonPurchasingService, PurchasingListener {
 
   private lateinit var requestUserDataId: RequestId
+  private lateinit var requestProductDataId: RequestId
 
   private val onUserDataListenerMap: MutableMap<RequestId, OnAmazonUserDataListener> =
+    mutableMapOf()
+  private val onProductDataListenerMap: MutableMap<RequestId, OnAmazonProductDataListener> =
     mutableMapOf()
 
   override fun registerPurchasingService() {
@@ -74,8 +78,48 @@ class AmazonPurchasingServiceImpl @Inject constructor(
     onUserDataListenerMap[requestUserDataId]?.onUserData(userDataResponse)
   }
 
-  override fun onProductDataResponse(p0: ProductDataResponse?) {
-    TODO("Not yet implemented")
+  private fun addOnAmazonProductDataListener(
+    requestId: RequestId,
+    listener: OnAmazonProductDataListener
+  ) {
+    onProductDataListenerMap[requestId] = listener
+  }
+
+  private fun removeOnAmazonProductDataListener(requestId: RequestId) {
+    onProductDataListenerMap.remove(requestId)
+  }
+
+  override suspend fun getProductData(productSkus: Set<String>): Map<String, Product> {
+    return suspendCancellableCoroutine { continuation ->
+      requestProductDataId = RequestId()
+      val onAmazonProductDataListener = object : OnAmazonProductDataListener {
+        override fun onProductData(productDataResponse: ProductDataResponse?) {
+          removeOnAmazonProductDataListener(requestProductDataId)
+          when (productDataResponse?.requestStatus) {
+            ProductDataResponse.RequestStatus.SUCCESSFUL -> {
+              continuation.resume(productDataResponse.productData)
+            }
+
+            ProductDataResponse.RequestStatus.FAILED, null -> {
+              continuation.resumeWithException(AmazonPurchaseException.GetProductDataFailedException)
+            }
+
+            ProductDataResponse.RequestStatus.NOT_SUPPORTED -> {
+              continuation.resumeWithException(AmazonPurchaseException.NotSupportedException)
+            }
+          }
+        }
+      }
+      continuation.invokeOnCancellation {
+        removeOnAmazonProductDataListener(requestProductDataId)
+      }
+      addOnAmazonProductDataListener(requestProductDataId, onAmazonProductDataListener)
+      PurchasingService.getProductData(productSkus)
+    }
+  }
+
+  override fun onProductDataResponse(productDataResponse: ProductDataResponse?) {
+    onProductDataListenerMap[requestProductDataId]?.onProductData(productDataResponse)
   }
 
   override fun onPurchaseResponse(p0: PurchaseResponse?) {
