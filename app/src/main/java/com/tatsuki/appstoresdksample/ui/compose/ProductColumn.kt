@@ -47,22 +47,26 @@ private fun ProductItem(
   ) {
     Row {
       Column(
-        modifier = Modifier.weight(0.2f)
+        modifier = Modifier.weight(0.3f)
       ) {
         Text(text = stringResource(id = R.string.product_sku_label))
         Text(text = stringResource(id = R.string.product_type_label))
         Text(text = stringResource(id = R.string.product_description_label))
         Text(text = stringResource(id = R.string.product_title_label))
         Text(text = stringResource(id = R.string.product_coins_reward_amount_label))
+        Text(text = stringResource(id = R.string.product_subscription_period_label))
+        Text(text = stringResource(id = R.string.product_free_trial_period_label))
       }
       Column(
-        modifier = Modifier.weight(0.8f)
+        modifier = Modifier.weight(0.7f)
       ) {
         Text(text = productItem.sku)
         Text(text = productItem.productType)
         Text(text = productItem.description)
         Text(text = productItem.title)
         Text(text = productItem.coinsReward.toString())
+        Text(text = productItem.subscriptionPeriod)
+        Text(text = productItem.freeTrialPeriod)
       }
     }
   }

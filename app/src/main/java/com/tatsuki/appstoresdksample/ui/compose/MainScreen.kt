@@ -70,6 +70,8 @@ private fun PreviewMainScreen() {
     smallIconUrl = "",
     title = "title",
     coinsReward = 0,
+    subscriptionPeriod = "",
+    freeTrialPeriod = ""
   )
   val dummyReceiptItem = ReceiptItem(
     id = "id",

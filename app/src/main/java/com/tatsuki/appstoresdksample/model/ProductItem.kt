@@ -9,6 +9,8 @@ data class ProductItem(
   val smallIconUrl: String,
   val title: String,
   val coinsReward: Int,
+  val subscriptionPeriod: String,
+  val freeTrialPeriod: String,
 ) {
 
   companion object {
@@ -19,7 +21,9 @@ data class ProductItem(
         description = product.description,
         smallIconUrl = product.smallIconUrl,
         title = product.title,
-        coinsReward = product.coinsReward?.amount ?: 0
+        coinsReward = product.coinsReward?.amount ?: 0,
+        subscriptionPeriod = product.subscriptionPeriod ?: "Null",
+        freeTrialPeriod = product.freeTrialPeriod ?: "Null"
       )
     }
   }
