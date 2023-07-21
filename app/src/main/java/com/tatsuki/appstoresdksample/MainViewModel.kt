@@ -43,6 +43,7 @@ class MainViewModel @Inject constructor(
       invoke {
         val productSkus = HashSet<String>()
         productSkus.add(SUBSCRIPTION_ITEM_TEST_SKU)
+        productSkus.add(SUBSCRIPTION_ITEM_TEST_NOT_TRIAL_SKU)
         val products = amazonPurchasingService.getProductData(productSkus)
           .map { product -> product.value }
         mutableProductsFlow.value = products
@@ -62,6 +63,7 @@ class MainViewModel @Inject constructor(
   companion object {
     private val TAG = MainViewModel::class.java.simpleName
 
-    private val SUBSCRIPTION_ITEM_TEST_SKU = "subscription_item_test"
+    private const val SUBSCRIPTION_ITEM_TEST_SKU = "subscription_item_test"
+    private const val SUBSCRIPTION_ITEM_TEST_NOT_TRIAL_SKU = "subscription_item_test_not_trail"
   }
 }
