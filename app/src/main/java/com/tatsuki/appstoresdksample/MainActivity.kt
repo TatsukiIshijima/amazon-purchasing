@@ -57,6 +57,7 @@ class MainActivity : ComponentActivity() {
                   .map { ProductItem.from(it) },
                 onClickItem = {
                   Log.d(TAG, "$it")
+                  mainViewModel.purchase(it.sku)
                 }
               )
             },

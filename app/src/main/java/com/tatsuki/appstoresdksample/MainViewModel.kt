@@ -3,6 +3,7 @@ package com.tatsuki.appstoresdksample
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.amazon.device.iap.model.FulfillmentResult
 import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.UserData
 import com.tatsuki.appstoresdksample.amazon.AmazonPurchasingService
@@ -47,6 +48,18 @@ class MainViewModel @Inject constructor(
         val products = amazonPurchasingService.getProductData(productSkus)
           .map { product -> product.value }
         mutableProductsFlow.value = products
+      }
+    }
+  }
+
+  fun purchase(productSku: String) {
+    viewModelScope.launch {
+      invoke {
+        val receipt = amazonPurchasingService.purchase(productSku)
+        amazonPurchasingService.notifyFulfillment(
+          receiptId = receipt.receiptId,
+          fulfillmentResult = FulfillmentResult.FULFILLED,
+        )
       }
     }
   }
