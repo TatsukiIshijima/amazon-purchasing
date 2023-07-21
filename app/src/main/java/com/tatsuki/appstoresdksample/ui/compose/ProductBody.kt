@@ -2,8 +2,8 @@ package com.tatsuki.appstoresdksample.ui.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.tatsuki.appstoresdksample.ProductItem
 import com.tatsuki.appstoresdksample.R
+import com.tatsuki.appstoresdksample.model.ProductItem
 
 @Composable
 fun ProductBody(

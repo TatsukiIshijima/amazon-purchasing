@@ -12,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
+import com.tatsuki.appstoresdksample.model.ProductItem
 import com.tatsuki.appstoresdksample.ui.compose.MainScreen
 import com.tatsuki.appstoresdksample.ui.compose.ProductBody
 import com.tatsuki.appstoresdksample.ui.compose.UserDataHeader

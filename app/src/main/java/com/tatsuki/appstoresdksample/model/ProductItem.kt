@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample
+package com.tatsuki.appstoresdksample.model
 
 import com.amazon.device.iap.model.Product
 
