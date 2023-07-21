@@ -6,17 +6,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
+import com.tatsuki.appstoresdksample.ui.compose.MainScreen
+import com.tatsuki.appstoresdksample.ui.compose.ProductBody
+import com.tatsuki.appstoresdksample.ui.compose.UserDataHeader
 import com.tatsuki.appstoresdksample.ui.theme.AppStoreSDKSampleTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -31,12 +31,6 @@ class MainActivity : ComponentActivity() {
     mainViewModel.registerPurchasingService()
 
     with(mainViewModel) {
-      userDataFlow
-        .filterNotNull()
-        .onEach {
-          Log.d(TAG, "UserData=$it")
-        }.launchIn(lifecycleScope)
-
       productsFlow
         .onEach {
           Log.d(TAG, "Products=$it")
@@ -48,7 +42,30 @@ class MainActivity : ComponentActivity() {
       AppStoreSDKSampleTheme {
         // A surface container using the 'background' color from the theme
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-          Greeting()
+          MainScreen(
+            header = {
+              UserDataHeader(
+                userId = mainViewModel.userDataFlow.collectAsState().value?.userId ?: "",
+                marketplace = mainViewModel.userDataFlow.collectAsState().value?.marketplace ?: ""
+              )
+            },
+            leftContent = {
+              ProductBody(
+                modifier = Modifier.fillMaxWidth(),
+                productItems = mainViewModel.productsFlow.collectAsState().value
+                  .map { ProductItem.from(it) },
+                onClickItem = {
+                  Log.d(TAG, "$it")
+                }
+              )
+            },
+            rightContent = {
+//              ReceiptBody(
+//                modifier = Modifier.fillMaxWidth(),
+//                receiptItems = emptyList(),
+//              )
+            },
+          )
         }
       }
     }
@@ -65,21 +82,5 @@ class MainActivity : ComponentActivity() {
 
   companion object {
     private val TAG = MainActivity::class.java.simpleName
-  }
-}
-
-@Composable
-fun Greeting(modifier: Modifier = Modifier) {
-  Text(
-    text = stringResource(id = R.string.app_name),
-    modifier = modifier
-  )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-  AppStoreSDKSampleTheme {
-    Greeting()
   }
 }

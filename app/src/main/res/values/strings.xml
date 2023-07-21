@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">AppStoreSDKSample</string>
+    <string name="user_id_label">UserID</string>
+    <string name="marketplace_label">Marketplace</string>
+    <string name="product_sku_label">SKU</string>
+    <string name="product_type_label">ProductType</string>
+    <string name="product_description_label">Description</string>
+    <string name="product_price_label">Price</string>
+    <string name="product_title_label">Title</string>
+    <string name="product_coins_reward_amount_label">CoinsReward</string>
+    <string name="product_subscription_period_label">SubscriptionPeriod</string>
+    <string name="product_free_trial_period_label">FreeTrialPeriod</string>
+    <string name="product_list_title">ProductItems</string>
+    <string name="receipt_list_title">ReceiptItems</string>
 </resources>
