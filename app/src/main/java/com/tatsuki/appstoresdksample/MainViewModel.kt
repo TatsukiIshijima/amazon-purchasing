@@ -69,10 +69,10 @@ class MainViewModel @Inject constructor(
     }
   }
 
-  fun getPurchaseUpdates() {
+  fun getPurchaseUpdates(requestAll: Boolean = false) {
     viewModelScope.launch {
       invoke {
-        mutablePurchasedReceiptsFlow.value = amazonPurchasingService.getPurchaseUpdates()
+        mutablePurchasedReceiptsFlow.value = amazonPurchasingService.getPurchaseUpdates(requestAll)
       }
     }
   }

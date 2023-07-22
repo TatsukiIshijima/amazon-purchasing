@@ -49,6 +49,8 @@ private fun ReceiptItem(
       Column(
         modifier = Modifier.weight(0.3f)
       ) {
+        Text(text = stringResource(id = R.string.user_id_label))
+        Text(text = stringResource(id = R.string.marketplace_label))
         Text(text = stringResource(id = R.string.receipt_id_label))
         Text(text = stringResource(id = R.string.receipt_product_type_label))
         Text(text = stringResource(id = R.string.receipt_purchase_date_label))
@@ -60,6 +62,8 @@ private fun ReceiptItem(
       Column(
         modifier = Modifier.weight(0.3f)
       ) {
+        Text(text = receiptItem.userId)
+        Text(text = receiptItem.marketplace)
         Text(text = receiptItem.receiptId)
         Text(text = receiptItem.productType)
         Text(text = receiptItem.purchaseDate)

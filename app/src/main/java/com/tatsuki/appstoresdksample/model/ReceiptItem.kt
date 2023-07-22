@@ -22,9 +22,9 @@ data class ReceiptItem(
         receiptId = amazonPurchasedReceipt.receipt.receiptId,
         productType = amazonPurchasedReceipt.receipt.productType.name,
         purchaseDate = amazonPurchasedReceipt.receipt.purchaseDate.toString(),
-        cancelDate = amazonPurchasedReceipt.receipt.cancelDate.toString(),
-        deferredDate = amazonPurchasedReceipt.receipt.deferredDate.toString(),
-        deferredSku = amazonPurchasedReceipt.receipt.deferredSku,
+        cancelDate = amazonPurchasedReceipt.receipt.cancelDate?.toString() ?: "",
+        deferredDate = amazonPurchasedReceipt.receipt.deferredDate?.toString() ?: "",
+        deferredSku = amazonPurchasedReceipt.receipt.deferredSku ?: "",
         termSku = amazonPurchasedReceipt.receipt.termSku
       )
     }
