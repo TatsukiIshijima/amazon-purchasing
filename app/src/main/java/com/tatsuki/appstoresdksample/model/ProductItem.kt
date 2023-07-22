@@ -20,7 +20,7 @@ data class ProductItem(
         sku = product.sku,
         productType = product.productType.name,
         description = product.description,
-        price = product.price,
+        price = product.price ?: "Null",
         smallIconUrl = product.smallIconUrl,
         title = product.title,
         coinsReward = product.coinsReward?.amount ?: 0,
