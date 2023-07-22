@@ -27,7 +27,7 @@ data class ReceiptItem(
         cancelDate = amazonPurchasedReceipt.receipt.cancelDate?.toString() ?: "Null",
         deferredDate = amazonPurchasedReceipt.receipt.deferredDate?.toString() ?: "Null",
         deferredSku = amazonPurchasedReceipt.receipt.deferredSku ?: "Null",
-        termSku = amazonPurchasedReceipt.receipt.termSku
+        termSku = amazonPurchasedReceipt.receipt.termSku ?: "Null"
       )
     }
   }
