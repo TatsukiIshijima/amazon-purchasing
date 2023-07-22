@@ -67,6 +67,7 @@ private fun PreviewMainScreen() {
     sku = "sku",
     productType = "productType",
     description = "description",
+    price = "0",
     smallIconUrl = "",
     title = "title",
     coinsReward = 0,

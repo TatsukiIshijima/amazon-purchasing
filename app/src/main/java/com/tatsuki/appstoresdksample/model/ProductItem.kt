@@ -6,6 +6,7 @@ data class ProductItem(
   val sku: String,
   val productType: String,
   val description: String,
+  val price: String,
   val smallIconUrl: String,
   val title: String,
   val coinsReward: Int,
@@ -19,11 +20,12 @@ data class ProductItem(
         sku = product.sku,
         productType = product.productType.name,
         description = product.description,
+        price = product.price,
         smallIconUrl = product.smallIconUrl,
         title = product.title,
         coinsReward = product.coinsReward?.amount ?: 0,
         subscriptionPeriod = product.subscriptionPeriod ?: "Null",
-        freeTrialPeriod = product.freeTrialPeriod ?: "Null"
+        freeTrialPeriod = product.freeTrialPeriod ?: "Null",
       )
     }
   }
