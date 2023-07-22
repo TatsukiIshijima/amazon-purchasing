@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -46,7 +47,9 @@ private fun ProductItem(
       .padding(top = 4.dp, bottom = 4.dp)
       .clickable { onClick(productItem) }
   ) {
-    Column {
+    Column(
+      modifier = Modifier.padding(8.dp)
+    ) {
       ProductItemRow(
         labelId = R.string.product_sku_label,
         text = productItem.sku
@@ -94,11 +97,13 @@ private fun ProductItemRow(
   ) {
     Text(
       text = stringResource(id = labelId),
-      modifier = Modifier.weight(0.3f)
+      modifier = Modifier.weight(0.3f),
+      style = MaterialTheme.typography.labelMedium
     )
     Text(
       text = text,
-      modifier = Modifier.weight(0.7f)
+      modifier = Modifier.weight(0.7f),
+      style = MaterialTheme.typography.bodyMedium
     )
   }
 }

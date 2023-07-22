@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +20,10 @@ fun Body(
   Column(
     modifier = modifier
   ) {
-    Text(text = stringResource(id = titleResource))
+    Text(
+      text = stringResource(id = titleResource),
+      style = MaterialTheme.typography.headlineSmall
+    )
     Spacer(modifier = Modifier.height(4.dp))
     column()
   }
