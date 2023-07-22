@@ -44,7 +44,7 @@ private fun ReceiptItem(
   Card(
     modifier = modifier
       .fillMaxWidth()
-      .padding(top = 4.dp, bottom = 4.dp)
+      .padding(top = 8.dp, bottom = 8.dp)
       .clickable { onClick(receiptItem) }
   ) {
     Column(

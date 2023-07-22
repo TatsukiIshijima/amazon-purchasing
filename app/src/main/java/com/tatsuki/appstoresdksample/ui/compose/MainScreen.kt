@@ -28,9 +28,9 @@ fun MainScreen(
   leftContent: @Composable () -> Unit,
   rightContent: @Composable () -> Unit,
 ) {
-  Column(modifier = modifier.padding(24.dp)) {
+  Column(modifier = modifier.padding(16.dp)) {
     header()
-    Spacer(modifier = Modifier.height(24.dp))
+    Spacer(modifier = Modifier.height(16.dp))
     Row(
       modifier = Modifier.fillMaxWidth()
     ) {
@@ -38,7 +38,7 @@ fun MainScreen(
         modifier = Modifier
           .weight(1f)
           .fillMaxHeight()
-          .padding(end = 12.dp)
+          .padding(end = 16.dp)
       ) {
         leftContent()
       }
@@ -46,13 +46,13 @@ fun MainScreen(
         modifier = Modifier
           .fillMaxHeight()
           .width(1.dp),
-        color = Color.Black,
+        color = Color.LightGray,
       )
       Box(
         modifier = Modifier
           .weight(1f)
           .fillMaxHeight()
-          .padding(start = 12.dp)
+          .padding(start = 16.dp)
       ) {
         rightContent()
       }
