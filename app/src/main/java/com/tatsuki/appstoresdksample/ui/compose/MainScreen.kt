@@ -76,6 +76,12 @@ private fun PreviewMainScreen() {
   )
   val dummyReceiptItem = ReceiptItem(
     id = "id",
+    productType = "productType",
+    purchaseDate = "purchaseDate",
+    cancelDate = "cancelDate",
+    deferredDate = "deferredDate",
+    deferredSku = "deferredSku",
+    termSku = "termSku",
   )
   AppStoreSDKSampleTheme {
     Surface {
@@ -89,14 +95,16 @@ private fun PreviewMainScreen() {
         leftContent = {
           ProductBody(
             modifier = Modifier.fillMaxWidth(),
-            productItems = (0..100).map { dummyProductItem },
+            productItems = (0..10).map { dummyProductItem },
             onClickItem = {}
           )
         },
         rightContent = {
           ReceiptBody(
             modifier = Modifier.fillMaxWidth(),
-            receiptItems = (0..10).map { dummyReceiptItem })
+            receiptItems = (0..10).map { dummyReceiptItem },
+            onClickItem = {}
+          )
         },
       )
     }

@@ -8,13 +8,17 @@ import com.tatsuki.appstoresdksample.model.ReceiptItem
 @Composable
 fun ReceiptBody(
   modifier: Modifier = Modifier,
-  receiptItems: List<ReceiptItem>
+  receiptItems: List<ReceiptItem>,
+  onClickItem: (ReceiptItem) -> Unit,
 ) {
   Body(
     modifier = modifier,
     titleResource = R.string.receipt_list_title,
     column = {
-
+      ReceiptColumn(
+        receiptItems = receiptItems,
+        onClickItem = { onClickItem(it) }
+      )
     }
   )
 }

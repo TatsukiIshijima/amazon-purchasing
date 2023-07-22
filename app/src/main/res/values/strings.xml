@@ -10,6 +10,13 @@
     <string name="product_coins_reward_amount_label">CoinsReward</string>
     <string name="product_subscription_period_label">SubscriptionPeriod</string>
     <string name="product_free_trial_period_label">FreeTrialPeriod</string>
+    <string name="receipt_id_label">ReceiptID</string>
+    <string name="receipt_product_type_label">ProductType</string>
+    <string name="receipt_purchase_date_label">PurchaseDate</string>
+    <string name="receipt_cancel_date_label">CancelDate</string>
+    <string name="receipt_deferred_date_label">DeferredDate</string>
+    <string name="receipt_deferred_sku_label">DeferredSKU</string>
+    <string name="receipt_term_sku_label">TermSKU</string>
     <string name="product_list_title">ProductItems</string>
     <string name="receipt_list_title">ReceiptItems</string>
 </resources>

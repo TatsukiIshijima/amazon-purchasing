@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.tatsuki.appstoresdksample.model.ProductItem
 import com.tatsuki.appstoresdksample.ui.compose.MainScreen
 import com.tatsuki.appstoresdksample.ui.compose.ProductBody
+import com.tatsuki.appstoresdksample.ui.compose.ReceiptBody
 import com.tatsuki.appstoresdksample.ui.compose.UserDataHeader
 import com.tatsuki.appstoresdksample.ui.theme.AppStoreSDKSampleTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,10 +63,13 @@ class MainActivity : ComponentActivity() {
               )
             },
             rightContent = {
-//              ReceiptBody(
-//                modifier = Modifier.fillMaxWidth(),
-//                receiptItems = emptyList(),
-//              )
+              ReceiptBody(
+                modifier = Modifier.fillMaxWidth(),
+                receiptItems = emptyList(),
+                onClickItem = {
+                  Log.d(TAG, "$it")
+                }
+              )
             },
           )
         }
