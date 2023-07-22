@@ -60,7 +60,7 @@ private fun ReceiptItem(
       Column(
         modifier = Modifier.weight(0.3f)
       ) {
-        Text(text = receiptItem.id)
+        Text(text = receiptItem.receiptId)
         Text(text = receiptItem.productType)
         Text(text = receiptItem.purchaseDate)
         Text(text = receiptItem.cancelDate)

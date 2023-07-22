@@ -1,9 +1,11 @@
 package com.tatsuki.appstoresdksample.model
 
-import com.amazon.device.iap.model.Receipt
+import com.tatsuki.appstoresdksample.amazon.AmazonPurchasedReceipt
 
 data class ReceiptItem(
-  val id: String,
+  val userId: String,
+  val marketplace: String,
+  val receiptId: String,
   val productType: String,
   val purchaseDate: String,
   val cancelDate: String,
@@ -13,15 +15,17 @@ data class ReceiptItem(
 ) {
 
   companion object {
-    fun from(receipt: Receipt): ReceiptItem {
+    fun from(amazonPurchasedReceipt: AmazonPurchasedReceipt): ReceiptItem {
       return ReceiptItem(
-        id = receipt.receiptId,
-        productType = receipt.productType.name,
-        purchaseDate = receipt.purchaseDate.toString(),
-        cancelDate = receipt.cancelDate.toString(),
-        deferredDate = receipt.deferredDate.toString(),
-        deferredSku = receipt.deferredSku,
-        termSku = receipt.termSku
+        userId = amazonPurchasedReceipt.userData.userId,
+        marketplace = amazonPurchasedReceipt.userData.marketplace,
+        receiptId = amazonPurchasedReceipt.receipt.receiptId,
+        productType = amazonPurchasedReceipt.receipt.productType.name,
+        purchaseDate = amazonPurchasedReceipt.receipt.purchaseDate.toString(),
+        cancelDate = amazonPurchasedReceipt.receipt.cancelDate.toString(),
+        deferredDate = amazonPurchasedReceipt.receipt.deferredDate.toString(),
+        deferredSku = amazonPurchasedReceipt.receipt.deferredSku,
+        termSku = amazonPurchasedReceipt.receipt.termSku
       )
     }
   }

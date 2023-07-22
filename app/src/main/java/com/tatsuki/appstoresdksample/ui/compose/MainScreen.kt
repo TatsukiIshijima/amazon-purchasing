@@ -75,7 +75,9 @@ private fun PreviewMainScreen() {
     freeTrialPeriod = ""
   )
   val dummyReceiptItem = ReceiptItem(
-    id = "id",
+    userId = "userId",
+    marketplace = "JP",
+    receiptId = "id",
     productType = "productType",
     purchaseDate = "purchaseDate",
     cancelDate = "cancelDate",
