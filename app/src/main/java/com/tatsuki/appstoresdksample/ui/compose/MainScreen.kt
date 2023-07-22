@@ -78,6 +78,7 @@ private fun PreviewMainScreen() {
     userId = "userId",
     marketplace = "JP",
     receiptId = "id",
+    sku = "sku",
     productType = "productType",
     purchaseDate = "purchaseDate",
     cancelDate = "cancelDate",

@@ -11,6 +11,7 @@
     <string name="product_subscription_period_label">SubscriptionPeriod</string>
     <string name="product_free_trial_period_label">FreeTrialPeriod</string>
     <string name="receipt_id_label">ReceiptID</string>
+    <string name="receipt_sku_label">SKU</string>
     <string name="receipt_product_type_label">ProductType</string>
     <string name="receipt_purchase_date_label">PurchaseDate</string>
     <string name="receipt_cancel_date_label">CancelDate</string>

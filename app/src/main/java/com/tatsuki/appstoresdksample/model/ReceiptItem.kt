@@ -6,6 +6,7 @@ data class ReceiptItem(
   val userId: String,
   val marketplace: String,
   val receiptId: String,
+  val sku: String,
   val productType: String,
   val purchaseDate: String,
   val cancelDate: String,
@@ -20,11 +21,12 @@ data class ReceiptItem(
         userId = amazonPurchasedReceipt.userData.userId,
         marketplace = amazonPurchasedReceipt.userData.marketplace,
         receiptId = amazonPurchasedReceipt.receipt.receiptId,
+        sku = amazonPurchasedReceipt.receipt.sku,
         productType = amazonPurchasedReceipt.receipt.productType.name,
         purchaseDate = amazonPurchasedReceipt.receipt.purchaseDate.toString(),
-        cancelDate = amazonPurchasedReceipt.receipt.cancelDate?.toString() ?: "",
-        deferredDate = amazonPurchasedReceipt.receipt.deferredDate?.toString() ?: "",
-        deferredSku = amazonPurchasedReceipt.receipt.deferredSku ?: "",
+        cancelDate = amazonPurchasedReceipt.receipt.cancelDate?.toString() ?: "Null",
+        deferredDate = amazonPurchasedReceipt.receipt.deferredDate?.toString() ?: "Null",
+        deferredSku = amazonPurchasedReceipt.receipt.deferredSku ?: "Null",
         termSku = amazonPurchasedReceipt.receipt.termSku
       )
     }

@@ -1,5 +1,6 @@
 package com.tatsuki.appstoresdksample.ui.compose
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -45,33 +46,67 @@ private fun ReceiptItem(
       .padding(top = 4.dp, bottom = 4.dp)
       .clickable { onClick(receiptItem) }
   ) {
-    Row {
-      Column(
-        modifier = Modifier.weight(0.3f)
-      ) {
-        Text(text = stringResource(id = R.string.user_id_label))
-        Text(text = stringResource(id = R.string.marketplace_label))
-        Text(text = stringResource(id = R.string.receipt_id_label))
-        Text(text = stringResource(id = R.string.receipt_product_type_label))
-        Text(text = stringResource(id = R.string.receipt_purchase_date_label))
-        Text(text = stringResource(id = R.string.receipt_cancel_date_label))
-        Text(text = stringResource(id = R.string.receipt_deferred_date_label))
-        Text(text = stringResource(id = R.string.receipt_deferred_sku_label))
-        Text(text = stringResource(id = R.string.receipt_term_sku_label))
-      }
-      Column(
-        modifier = Modifier.weight(0.3f)
-      ) {
-        Text(text = receiptItem.userId)
-        Text(text = receiptItem.marketplace)
-        Text(text = receiptItem.receiptId)
-        Text(text = receiptItem.productType)
-        Text(text = receiptItem.purchaseDate)
-        Text(text = receiptItem.cancelDate)
-        Text(text = receiptItem.deferredDate)
-        Text(text = receiptItem.deferredSku)
-        Text(text = receiptItem.termSku)
-      }
+    Column {
+      ReceiptItemRow(
+        labelId = R.string.user_id_label,
+        text = receiptItem.userId,
+      )
+      ReceiptItemRow(
+        labelId = R.string.marketplace_label,
+        text = receiptItem.marketplace
+      )
+      ReceiptItemRow(
+        labelId = R.string.receipt_id_label,
+        text = receiptItem.receiptId
+      )
+      ReceiptItemRow(
+        labelId = R.string.receipt_sku_label,
+        text = receiptItem.sku
+      )
+      ReceiptItemRow(
+        labelId = R.string.receipt_product_type_label,
+        text = receiptItem.productType
+      )
+      ReceiptItemRow(
+        labelId = R.string.receipt_purchase_date_label,
+        text = receiptItem.purchaseDate
+      )
+      ReceiptItemRow(
+        labelId = R.string.receipt_cancel_date_label,
+        text = receiptItem.cancelDate
+      )
+      ReceiptItemRow(
+        labelId = R.string.receipt_deferred_date_label,
+        text = receiptItem.deferredDate
+      )
+      ReceiptItemRow(
+        labelId = R.string.receipt_deferred_sku_label,
+        text = receiptItem.deferredSku
+      )
+      ReceiptItemRow(
+        labelId = R.string.receipt_term_sku_label,
+        text = receiptItem.termSku
+      )
     }
+  }
+}
+
+@Composable
+private fun ReceiptItemRow(
+  modifier: Modifier = Modifier,
+  @StringRes labelId: Int,
+  text: String,
+) {
+  Row(
+    modifier = modifier
+  ) {
+    Text(
+      text = stringResource(id = labelId),
+      modifier = Modifier.weight(0.3f)
+    )
+    Text(
+      text = text,
+      modifier = Modifier.weight(0.7f)
+    )
   }
 }

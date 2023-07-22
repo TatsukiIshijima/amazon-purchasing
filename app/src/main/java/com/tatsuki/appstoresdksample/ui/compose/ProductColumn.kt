@@ -1,5 +1,6 @@
 package com.tatsuki.appstoresdksample.ui.compose
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -45,31 +46,59 @@ private fun ProductItem(
       .padding(top = 4.dp, bottom = 4.dp)
       .clickable { onClick(productItem) }
   ) {
-    Row {
-      Column(
-        modifier = Modifier.weight(0.3f)
-      ) {
-        Text(text = stringResource(id = R.string.product_sku_label))
-        Text(text = stringResource(id = R.string.product_type_label))
-        Text(text = stringResource(id = R.string.product_description_label))
-        Text(text = stringResource(id = R.string.product_price_label))
-        Text(text = stringResource(id = R.string.product_title_label))
-        Text(text = stringResource(id = R.string.product_coins_reward_amount_label))
-        Text(text = stringResource(id = R.string.product_subscription_period_label))
-        Text(text = stringResource(id = R.string.product_free_trial_period_label))
-      }
-      Column(
-        modifier = Modifier.weight(0.7f)
-      ) {
-        Text(text = productItem.sku)
-        Text(text = productItem.productType)
-        Text(text = productItem.description)
-        Text(text = productItem.price)
-        Text(text = productItem.title)
-        Text(text = productItem.coinsReward.toString())
-        Text(text = productItem.subscriptionPeriod)
-        Text(text = productItem.freeTrialPeriod)
-      }
+    Column {
+      ProductItemRow(
+        labelId = R.string.product_sku_label,
+        text = productItem.sku
+      )
+      ProductItemRow(
+        labelId = R.string.product_type_label,
+        text = productItem.productType
+      )
+      ProductItemRow(
+        labelId = R.string.product_description_label,
+        text = productItem.description
+      )
+      ProductItemRow(
+        labelId = R.string.product_price_label,
+        text = productItem.price
+      )
+      ProductItemRow(
+        labelId = R.string.product_title_label,
+        text = productItem.title
+      )
+      ProductItemRow(
+        labelId = R.string.product_coins_reward_amount_label,
+        text = productItem.coinsReward.toString()
+      )
+      ProductItemRow(
+        labelId = R.string.product_subscription_period_label,
+        text = productItem.subscriptionPeriod
+      )
+      ProductItemRow(
+        labelId = R.string.product_free_trial_period_label,
+        text = productItem.freeTrialPeriod
+      )
     }
+  }
+}
+
+@Composable
+private fun ProductItemRow(
+  modifier: Modifier = Modifier,
+  @StringRes labelId: Int,
+  text: String,
+) {
+  Row(
+    modifier = modifier
+  ) {
+    Text(
+      text = stringResource(id = labelId),
+      modifier = Modifier.weight(0.3f)
+    )
+    Text(
+      text = text,
+      modifier = Modifier.weight(0.7f)
+    )
   }
 }
