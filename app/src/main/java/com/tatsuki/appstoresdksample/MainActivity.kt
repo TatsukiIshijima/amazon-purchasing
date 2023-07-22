@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import com.tatsuki.appstoresdksample.model.ProductItem
+import com.tatsuki.appstoresdksample.model.ReceiptItem
 import com.tatsuki.appstoresdksample.ui.compose.MainScreen
 import com.tatsuki.appstoresdksample.ui.compose.ProductBody
 import com.tatsuki.appstoresdksample.ui.compose.ReceiptBody
@@ -65,7 +66,8 @@ class MainActivity : ComponentActivity() {
             rightContent = {
               ReceiptBody(
                 modifier = Modifier.fillMaxWidth(),
-                receiptItems = emptyList(),
+                receiptItems = mainViewModel.purchasedReceiptFlow.collectAsState().value
+                  .map { ReceiptItem.from(it) },
                 onClickItem = {
                   Log.d(TAG, "$it")
                 }
@@ -83,6 +85,7 @@ class MainActivity : ComponentActivity() {
     with(mainViewModel) {
       getUserData()
       getProductData()
+      getPurchaseUpdates()
     }
   }
 

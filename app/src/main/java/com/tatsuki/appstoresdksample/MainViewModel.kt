@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.amazon.device.iap.model.FulfillmentResult
 import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.UserData
+import com.tatsuki.appstoresdksample.amazon.AmazonPurchasedReceipt
 import com.tatsuki.appstoresdksample.amazon.AmazonPurchasingService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ensureActive
@@ -25,6 +26,10 @@ class MainViewModel @Inject constructor(
 
   private val mutableProductsFlow: MutableStateFlow<List<Product>> = MutableStateFlow(emptyList())
   val productsFlow = mutableProductsFlow.asStateFlow()
+
+  private val mutablePurchasedReceiptsFlow: MutableStateFlow<List<AmazonPurchasedReceipt>> =
+    MutableStateFlow(emptyList())
+  val purchasedReceiptFlow = mutablePurchasedReceiptsFlow.asStateFlow()
 
   fun registerPurchasingService() {
     amazonPurchasingService.registerPurchasingService()
@@ -55,11 +60,19 @@ class MainViewModel @Inject constructor(
   fun purchase(productSku: String) {
     viewModelScope.launch {
       invoke {
-        val receipt = amazonPurchasingService.purchase(productSku)
+        val purchasedReceipt = amazonPurchasingService.purchase(productSku)
         amazonPurchasingService.notifyFulfillment(
-          receiptId = receipt.receiptId,
+          receiptId = purchasedReceipt.receipt.receiptId,
           fulfillmentResult = FulfillmentResult.FULFILLED,
         )
+      }
+    }
+  }
+
+  fun getPurchaseUpdates() {
+    viewModelScope.launch {
+      invoke {
+        mutablePurchasedReceiptsFlow.value = amazonPurchasingService.getPurchaseUpdates()
       }
     }
   }

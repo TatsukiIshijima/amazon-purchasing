@@ -8,7 +8,6 @@ import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.ProductDataResponse
 import com.amazon.device.iap.model.PurchaseResponse
 import com.amazon.device.iap.model.PurchaseUpdatesResponse
-import com.amazon.device.iap.model.Receipt
 import com.amazon.device.iap.model.RequestId
 import com.amazon.device.iap.model.UserData
 import com.amazon.device.iap.model.UserDataResponse
@@ -25,12 +24,15 @@ class AmazonPurchasingServiceImpl @Inject constructor(
   private lateinit var requestUserDataId: RequestId
   private lateinit var requestProductDataId: RequestId
   private lateinit var requestPurchaseId: RequestId
+  private lateinit var requestPurchaseUpdatesId: RequestId
 
   private val onUserDataListenerMap: MutableMap<RequestId, OnAmazonUserDataListener> =
     mutableMapOf()
   private val onProductDataListenerMap: MutableMap<RequestId, OnAmazonProductDataListener> =
     mutableMapOf()
   private val onPurchaseListenerMap: MutableMap<RequestId, OnAmazonPurchaseListener> =
+    mutableMapOf()
+  private val onPurchaseUpdatesListenerMap: MutableMap<RequestId, OnAmazonPurchaseUpdatesListener> =
     mutableMapOf()
 
   override fun registerPurchasingService() {
@@ -138,7 +140,7 @@ class AmazonPurchasingServiceImpl @Inject constructor(
     onPurchaseListenerMap.remove(requestId)
   }
 
-  override suspend fun purchase(productSku: String): Receipt {
+  override suspend fun purchase(productSku: String): AmazonPurchasedReceipt {
     return suspendCancellableCoroutine { continuation ->
       requestPurchaseId = RequestId()
       val onAmazonPurchaseListener = object : OnAmazonPurchaseListener {
@@ -146,7 +148,12 @@ class AmazonPurchasingServiceImpl @Inject constructor(
           removeOnAmazonPurchaseListener(requestPurchaseId)
           when (purchaseResponse?.requestStatus) {
             PurchaseResponse.RequestStatus.SUCCESSFUL -> {
-              continuation.resume(purchaseResponse.receipt)
+              continuation.resume(
+                AmazonPurchasedReceipt(
+                  purchaseResponse.userData,
+                  purchaseResponse.receipt
+                )
+              )
             }
 
             PurchaseResponse.RequestStatus.FAILED, null -> {
@@ -187,7 +194,11 @@ class AmazonPurchasingServiceImpl @Inject constructor(
     PurchasingService.notifyFulfillment(receiptId, fulfillmentResult)
   }
 
-  override fun onPurchaseUpdatesResponse(p0: PurchaseUpdatesResponse?) {
-    TODO("Not yet implemented")
+  override suspend fun getPurchaseUpdates(): List<AmazonPurchasedReceipt> {
+    return emptyList()
+  }
+
+  override fun onPurchaseUpdatesResponse(purchaseUpdatesResponse: PurchaseUpdatesResponse?) {
+
   }
 }
