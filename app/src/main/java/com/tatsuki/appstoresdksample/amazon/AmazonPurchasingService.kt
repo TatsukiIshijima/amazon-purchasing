@@ -16,5 +16,5 @@ interface AmazonPurchasingService {
 
   fun notifyFulfillment(receiptId: String, fulfillmentResult: FulfillmentResult)
 
-  suspend fun getPurchaseUpdates(): List<AmazonPurchasedReceipt>
+  suspend fun getPurchaseUpdates(requestAll: Boolean = false): List<AmazonPurchasedReceipt>
 }

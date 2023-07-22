@@ -194,11 +194,65 @@ class AmazonPurchasingServiceImpl @Inject constructor(
     PurchasingService.notifyFulfillment(receiptId, fulfillmentResult)
   }
 
-  override suspend fun getPurchaseUpdates(): List<AmazonPurchasedReceipt> {
-    return emptyList()
+  override suspend fun getPurchaseUpdates(requestAll: Boolean): List<AmazonPurchasedReceipt> {
+    return suspendCancellableCoroutine { continuation ->
+      requestPurchaseUpdatesId = RequestId()
+      val amazonPurchasedReceipts = mutableListOf<AmazonPurchasedReceipt>()
+      val onAmazonPurchaseUpdatesListener = object : OnAmazonPurchaseUpdatesListener {
+        override fun onPurchaseUpdates(purchaseUpdatesResponse: PurchaseUpdatesResponse?) {
+          when (purchaseUpdatesResponse?.requestStatus) {
+            PurchaseUpdatesResponse.RequestStatus.SUCCESSFUL -> {
+              amazonPurchasedReceipts.addAll(
+                purchaseUpdatesResponse.receipts.map {
+                  AmazonPurchasedReceipt(
+                    userData = purchaseUpdatesResponse.userData,
+                    receipt = it
+                  )
+                }
+              )
+              if (purchaseUpdatesResponse.hasMore()) {
+                PurchasingService.getPurchaseUpdates(false)
+              } else {
+                removeOnPurchaseUpdatesListener(requestPurchaseUpdatesId)
+                continuation.resume(amazonPurchasedReceipts)
+              }
+            }
+
+            PurchaseUpdatesResponse.RequestStatus.FAILED, null -> {
+              removeOnPurchaseUpdatesListener(requestPurchaseUpdatesId)
+              continuation.resumeWithException(AmazonPurchaseServiceException.PurchaseFailedException)
+            }
+
+            PurchaseUpdatesResponse.RequestStatus.NOT_SUPPORTED -> {
+              removeOnPurchaseUpdatesListener(requestPurchaseUpdatesId)
+              continuation.resumeWithException(AmazonPurchaseServiceException.NotSupportedException)
+            }
+          }
+        }
+      }
+      continuation.invokeOnCancellation {
+        removeOnPurchaseUpdatesListener(requestPurchaseUpdatesId)
+      }
+      addOnPurchaseUpdatesListener(requestPurchaseUpdatesId, onAmazonPurchaseUpdatesListener)
+      PurchasingService.getPurchaseUpdates(requestAll)
+    }
   }
 
-  override fun onPurchaseUpdatesResponse(purchaseUpdatesResponse: PurchaseUpdatesResponse?) {
+  private fun addOnPurchaseUpdatesListener(
+    requestId: RequestId,
+    listener: OnAmazonPurchaseUpdatesListener
+  ) {
+    onPurchaseUpdatesListenerMap[requestId] = listener
+  }
 
+  private fun removeOnPurchaseUpdatesListener(requestId: RequestId) {
+    onPurchaseUpdatesListenerMap.remove(requestId)
+  }
+
+
+  override fun onPurchaseUpdatesResponse(purchaseUpdatesResponse: PurchaseUpdatesResponse?) {
+    onPurchaseUpdatesListenerMap[requestPurchaseUpdatesId]?.onPurchaseUpdates(
+      purchaseUpdatesResponse
+    )
   }
 }
