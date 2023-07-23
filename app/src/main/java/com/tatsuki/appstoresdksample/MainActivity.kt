@@ -85,7 +85,7 @@ class MainActivity : ComponentActivity() {
     with(mainViewModel) {
       getUserData()
       getProductData()
-      getPurchaseUpdates(true)
+      getPurchaseUpdates(false)
     }
   }
 
