@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.amazon.device.iap.model.FulfillmentResult
 import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.UserData
-import com.tatsuki.appstoresdksample.amazon.AmazonPurchasedReceipt
-import com.tatsuki.appstoresdksample.amazon.AmazonPurchasingService
+import com.tatsuki.amazon.purchasing.AmazonPurchasedReceipt
+import com.tatsuki.amazon.purchasing.AmazonPurchasingService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow

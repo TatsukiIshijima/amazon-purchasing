@@ -1,8 +1,8 @@
 package com.tatsuki.appstoresdksample.module
 
 import android.content.Context
-import com.tatsuki.appstoresdksample.amazon.AmazonPurchasingService
-import com.tatsuki.appstoresdksample.amazon.AmazonPurchasingServiceImpl
+import com.tatsuki.amazon.purchasing.AmazonPurchasingService
+import com.tatsuki.amazon.purchasing.AmazonPurchasingServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

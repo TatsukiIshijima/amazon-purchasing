@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample.amazon
+package com.tatsuki.amazon.purchasing
 
 import android.content.Context
 import com.amazon.device.iap.PurchasingListener
@@ -11,14 +11,12 @@ import com.amazon.device.iap.model.PurchaseUpdatesResponse
 import com.amazon.device.iap.model.RequestId
 import com.amazon.device.iap.model.UserData
 import com.amazon.device.iap.model.UserDataResponse
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.suspendCancellableCoroutine
-import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class AmazonPurchasingServiceImpl @Inject constructor(
-  @ApplicationContext private val context: Context,
+class AmazonPurchasingServiceImpl(
+  private val context: Context,
 ) : AmazonPurchasingService, PurchasingListener {
 
   private lateinit var requestUserDataId: RequestId

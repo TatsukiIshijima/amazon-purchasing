@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample.amazon
+package com.tatsuki.amazon.purchasing
 
 sealed class AmazonPurchaseServiceException : Exception() {
 
