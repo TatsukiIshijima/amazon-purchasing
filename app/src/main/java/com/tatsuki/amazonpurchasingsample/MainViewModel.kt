@@ -48,8 +48,10 @@ class MainViewModel @Inject constructor(
     viewModelScope.launch {
       invoke {
         val productSkus = HashSet<String>()
-        productSkus.add(SUBSCRIPTION_ITEM_TEST_SKU)
-        productSkus.add(SUBSCRIPTION_ITEM_TEST_NOT_TRIAL_SKU)
+        productSkus.add(SUBSCRIPTION_ITEM_WEEKLY_TEST_WITHOUT_TRIAL_SKU)
+        productSkus.add(SUBSCRIPTION_ITEM_WEEKLY_TEST_WITH_TRIAL_SKU)
+        productSkus.add(SUBSCRIPTION_ITEM_MONTHLY_TEST_WITHOUT_TRIAL_SKU)
+        productSkus.add(SUBSCRIPTION_ITEM_MONTHLY_TEST_WITH_TRIAL_SKU)
         val products = amazonPurchasingService.getProductData(productSkus)
           .map { product -> product.value }
         mutableProductsFlow.value = products
@@ -89,7 +91,13 @@ class MainViewModel @Inject constructor(
   companion object {
     private val TAG = MainViewModel::class.java.simpleName
 
-    private const val SUBSCRIPTION_ITEM_TEST_SKU = "subscription_item_test"
-    private const val SUBSCRIPTION_ITEM_TEST_NOT_TRIAL_SKU = "subscription_item_test_not_trail"
+    private const val SUBSCRIPTION_ITEM_WEEKLY_TEST_WITHOUT_TRIAL_SKU =
+      "subscription_item_weekly_test_without_trail"
+    private const val SUBSCRIPTION_ITEM_WEEKLY_TEST_WITH_TRIAL_SKU =
+      "subscription_item_weekly_test_with_trail"
+    private const val SUBSCRIPTION_ITEM_MONTHLY_TEST_WITHOUT_TRIAL_SKU =
+      "subscription_item_monthly_test_without_trail"
+    private const val SUBSCRIPTION_ITEM_MONTHLY_TEST_WITH_TRIAL_SKU =
+      "subscription_item_monthly_test_with_trail"
   }
 }
