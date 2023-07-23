@@ -87,6 +87,7 @@ dependencies {
   implementation("androidx.compose.material3:material3")
   implementation("com.amazon.device:amazon-appstore-sdk:3.0.4")
   implementation("com.google.dagger:hilt-android:2.44")
+  implementation(project(":amazon"))
   kapt("com.google.dagger:hilt-android-compiler:2.44")
   testImplementation("junit:junit:4.13.2")
   androidTestImplementation("androidx.test.ext:junit:1.1.5")
