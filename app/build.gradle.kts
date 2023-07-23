@@ -13,7 +13,7 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
-  namespace = "com.tatsuki.appstoresdksample"
+  namespace = "com.tatsuki.amazonpurchasingsample"
   compileSdk = 33
 
   signingConfigs {
@@ -26,7 +26,7 @@ android {
   }
 
   defaultConfig {
-    applicationId = "com.tatsuki.appstoresdksample"
+    applicationId = "com.tatsuki.amazonpurchasingsample"
     minSdk = 21
     targetSdk = 33
     versionCode = 5

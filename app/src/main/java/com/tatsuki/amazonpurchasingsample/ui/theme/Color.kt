@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample.ui.theme
+package com.tatsuki.amazonpurchasingsample.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample
+package com.tatsuki.amazonpurchasingsample
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

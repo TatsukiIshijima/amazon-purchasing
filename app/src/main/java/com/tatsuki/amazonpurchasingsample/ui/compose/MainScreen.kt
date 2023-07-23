@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample.ui.compose
+package com.tatsuki.amazonpurchasingsample.ui.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,9 +17,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.tatsuki.appstoresdksample.model.ProductItem
-import com.tatsuki.appstoresdksample.model.ReceiptItem
-import com.tatsuki.appstoresdksample.ui.theme.AppStoreSDKSampleTheme
+import com.tatsuki.amazonpurchasingsample.model.ProductItem
+import com.tatsuki.amazonpurchasingsample.model.ReceiptItem
+import com.tatsuki.amazonpurchasingsample.ui.theme.AppStoreSDKSampleTheme
 
 @Composable
 fun MainScreen(

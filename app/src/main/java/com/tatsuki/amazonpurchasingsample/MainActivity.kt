@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample
+package com.tatsuki.amazonpurchasingsample
 
 import android.os.Bundle
 import android.util.Log
@@ -12,13 +12,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
-import com.tatsuki.appstoresdksample.model.ProductItem
-import com.tatsuki.appstoresdksample.model.ReceiptItem
-import com.tatsuki.appstoresdksample.ui.compose.MainScreen
-import com.tatsuki.appstoresdksample.ui.compose.ProductBody
-import com.tatsuki.appstoresdksample.ui.compose.ReceiptBody
-import com.tatsuki.appstoresdksample.ui.compose.UserDataHeader
-import com.tatsuki.appstoresdksample.ui.theme.AppStoreSDKSampleTheme
+import com.tatsuki.amazonpurchasingsample.model.ProductItem
+import com.tatsuki.amazonpurchasingsample.model.ReceiptItem
+import com.tatsuki.amazonpurchasingsample.ui.compose.MainScreen
+import com.tatsuki.amazonpurchasingsample.ui.compose.ProductBody
+import com.tatsuki.amazonpurchasingsample.ui.compose.ReceiptBody
+import com.tatsuki.amazonpurchasingsample.ui.compose.UserDataHeader
+import com.tatsuki.amazonpurchasingsample.ui.theme.AppStoreSDKSampleTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

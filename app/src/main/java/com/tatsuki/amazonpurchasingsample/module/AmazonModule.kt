@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample.module
+package com.tatsuki.amazonpurchasingsample.module
 
 import android.content.Context
 import com.tatsuki.amazon.purchasing.AmazonPurchasingService

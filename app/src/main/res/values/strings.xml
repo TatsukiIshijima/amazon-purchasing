@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppStoreSDKSample</string>
+    <string name="app_name">AmazonPurchasingSample</string>
     <string name="user_id_label">UserID</string>
     <string name="marketplace_label">Marketplace</string>
     <string name="product_sku_label">SKU</string>

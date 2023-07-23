@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample.model
+package com.tatsuki.amazonpurchasingsample.model
 
 import com.tatsuki.amazon.purchasing.AmazonPurchasedReceipt
 

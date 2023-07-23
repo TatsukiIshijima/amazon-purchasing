@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "appstoresdk-sample"
+rootProject.name = "amazon-purchasing-sample"
 include ':app'
 include ':amazon'

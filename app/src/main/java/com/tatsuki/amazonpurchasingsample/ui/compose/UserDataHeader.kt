@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample.ui.compose
+package com.tatsuki.amazonpurchasingsample.ui.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.tatsuki.appstoresdksample.R
-import com.tatsuki.appstoresdksample.ui.theme.AppStoreSDKSampleTheme
+import com.tatsuki.amazonpurchasingsample.R
+import com.tatsuki.amazonpurchasingsample.ui.theme.AppStoreSDKSampleTheme
 
 @Composable
 fun UserDataHeader(

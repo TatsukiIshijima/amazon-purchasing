@@ -1,4 +1,4 @@
-package com.tatsuki.appstoresdksample
+package com.tatsuki.amazonpurchasingsample
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
