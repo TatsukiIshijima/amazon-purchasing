@@ -1,6 +1,7 @@
 plugins {
   id("com.android.library")
   id("org.jetbrains.kotlin.android")
+  id("maven-publish")
 }
 
 android {
@@ -34,4 +35,18 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
   api("com.amazon.device:amazon-appstore-sdk:3.0.4")
   testImplementation("junit:junit:4.13.2")
+}
+
+publishing {
+  publications {
+    register<MavenPublication>("release") {
+      groupId = "com.github.TatsukiIshijima"
+      artifactId = "amazon-purchasing"
+      version = "0.1.0-alpha"
+
+      afterEvaluate {
+        from(components["release"])
+      }
+    }
+  }
 }
