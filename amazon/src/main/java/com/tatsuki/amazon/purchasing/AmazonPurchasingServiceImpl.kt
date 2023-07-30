@@ -11,6 +11,15 @@ import com.amazon.device.iap.model.PurchaseUpdatesResponse
 import com.amazon.device.iap.model.RequestId
 import com.amazon.device.iap.model.UserData
 import com.amazon.device.iap.model.UserDataResponse
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.AlreadyPurchasedException
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.Companion.DEFAULT_STATUS_CODE
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.GetProductDataFailedException
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.GetUserDataFailedException
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.InvalidSkuException
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.NotSupportedException
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.PendingException
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.PurchaseFailedException
+import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.PurchaseUpdatesFailedException
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -62,11 +71,19 @@ class AmazonPurchasingServiceImpl(
             }
 
             UserDataResponse.RequestStatus.FAILED, null -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.GetUserDataFailedException)
+              continuation.resumeWithException(
+                GetUserDataFailedException(
+                  statusCode = userDataResponse?.requestStatus?.ordinal ?: DEFAULT_STATUS_CODE
+                )
+              )
             }
 
             UserDataResponse.RequestStatus.NOT_SUPPORTED -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.NotSupportedException)
+              continuation.resumeWithException(
+                NotSupportedException(
+                  statusCode = userDataResponse.requestStatus.ordinal
+                )
+              )
             }
           }
         }
@@ -106,11 +123,19 @@ class AmazonPurchasingServiceImpl(
             }
 
             ProductDataResponse.RequestStatus.FAILED, null -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.GetProductDataFailedException)
+              continuation.resumeWithException(
+                GetProductDataFailedException(
+                  statusCode = productDataResponse?.requestStatus?.ordinal ?: DEFAULT_STATUS_CODE
+                )
+              )
             }
 
             ProductDataResponse.RequestStatus.NOT_SUPPORTED -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.NotSupportedException)
+              continuation.resumeWithException(
+                NotSupportedException(
+                  statusCode = productDataResponse.requestStatus.ordinal
+                )
+              )
             }
           }
         }
@@ -155,23 +180,43 @@ class AmazonPurchasingServiceImpl(
             }
 
             PurchaseResponse.RequestStatus.FAILED, null -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.PurchaseFailedException)
+              continuation.resumeWithException(
+                PurchaseFailedException(
+                  statusCode = purchaseResponse?.requestStatus?.ordinal ?: DEFAULT_STATUS_CODE
+                )
+              )
             }
 
             PurchaseResponse.RequestStatus.INVALID_SKU -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.InvalidSkuException)
+              continuation.resumeWithException(
+                InvalidSkuException(
+                  statusCode = purchaseResponse.requestStatus.ordinal
+                )
+              )
             }
 
             PurchaseResponse.RequestStatus.ALREADY_PURCHASED -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.AlreadyPurchasedException)
+              continuation.resumeWithException(
+                AlreadyPurchasedException(
+                  statusCode = purchaseResponse.requestStatus.ordinal
+                )
+              )
             }
 
             PurchaseResponse.RequestStatus.PENDING -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.PendingException)
+              continuation.resumeWithException(
+                PendingException(
+                  statusCode = purchaseResponse.requestStatus.ordinal
+                )
+              )
             }
 
             PurchaseResponse.RequestStatus.NOT_SUPPORTED -> {
-              continuation.resumeWithException(AmazonPurchaseServiceException.NotSupportedException)
+              continuation.resumeWithException(
+                NotSupportedException(
+                  statusCode = purchaseResponse.requestStatus.ordinal
+                )
+              )
             }
           }
         }
@@ -218,12 +263,21 @@ class AmazonPurchasingServiceImpl(
 
             PurchaseUpdatesResponse.RequestStatus.FAILED, null -> {
               removeOnPurchaseUpdatesListener(requestPurchaseUpdatesId)
-              continuation.resumeWithException(AmazonPurchaseServiceException.PurchaseFailedException)
+              continuation.resumeWithException(
+                PurchaseUpdatesFailedException(
+                  statusCode = purchaseUpdatesResponse?.requestStatus?.ordinal
+                    ?: DEFAULT_STATUS_CODE
+                )
+              )
             }
 
             PurchaseUpdatesResponse.RequestStatus.NOT_SUPPORTED -> {
               removeOnPurchaseUpdatesListener(requestPurchaseUpdatesId)
-              continuation.resumeWithException(AmazonPurchaseServiceException.NotSupportedException)
+              continuation.resumeWithException(
+                NotSupportedException(
+                  statusCode = purchaseUpdatesResponse.requestStatus.ordinal
+                )
+              )
             }
           }
         }
