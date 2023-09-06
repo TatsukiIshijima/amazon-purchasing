@@ -15,8 +15,7 @@ wrapper with Coroutine.
 ### Setup
 
 Add ResponseReceiver to the your Manifest with reference to the
-documentation [here](https://developer.amazon.com/ja/docs/in-app-purchasing/iap-implement-iap.html#responsereceiver)
-.
+documentation [here](https://developer.amazon.com/ja/docs/in-app-purchasing/iap-implement-iap.html#responsereceiver).
 
 ### getUserData
 
@@ -62,6 +61,17 @@ amazonPurchasingService.notifyFulfillment(
 ## Sample App
 
 ### Setup
+1. Download public key from Amazon Developer Console.(ref: https://developer.amazon.com/docs/appstore-sdk/integrate-appstore-sdk.html#configure-key)
+2. Add debug keystore properties in local.properties.
+
+```local.properties
+storePassword=android
+keyPassword=android
+keyAlias=androiddebugkey
+storeFile=/Users/{UserName}/.android/debug.keystore
+```
+
+3. Execute gradle sync.
 
 ### ScreenShot
 
