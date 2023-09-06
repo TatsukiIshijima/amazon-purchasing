@@ -10,6 +10,12 @@
     <string name="product_coins_reward_amount_label">CoinsReward</string>
     <string name="product_subscription_period_label">SubscriptionPeriod</string>
     <string name="product_free_trial_period_label">FreeTrialPeriod</string>
+    <string name="promotions_label">Promotions</string>
+    <string name="promotion_type_label">PromotionType</string>
+    <string name="promotion_plans_label">PromotionPlans</string>
+    <string name="promotion_price_period_label">PromotionPricePeriod</string>
+    <string name="promotion_price_label">PromotionPrice</string>
+    <string name="promotion_price_cycles_label">PromotionPriceCycles</string>
     <string name="receipt_id_label">ReceiptID</string>
     <string name="receipt_sku_label">SKU</string>
     <string name="receipt_product_type_label">ProductType</string>
