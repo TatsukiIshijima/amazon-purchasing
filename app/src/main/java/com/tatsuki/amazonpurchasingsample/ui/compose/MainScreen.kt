@@ -18,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tatsuki.amazonpurchasingsample.model.ProductItem
+import com.tatsuki.amazonpurchasingsample.model.PromotionItem
+import com.tatsuki.amazonpurchasingsample.model.PromotionPlanItem
 import com.tatsuki.amazonpurchasingsample.model.ReceiptItem
 import com.tatsuki.amazonpurchasingsample.ui.theme.AppStoreSDKSampleTheme
 
@@ -72,7 +74,19 @@ private fun PreviewMainScreen() {
     title = "title",
     coinsReward = 0,
     subscriptionPeriod = "",
-    freeTrialPeriod = ""
+    freeTrialPeriod = "",
+    promotions = listOf(
+      PromotionItem(
+        promotionType = "introductory",
+        promotionPlans = listOf(
+          PromotionPlanItem(
+            promotionPricePeriod = "Monthly",
+            promotionPrice = "500",
+            promotionPriceCycles = 1,
+          )
+        )
+      )
+    ),
   )
   val dummyReceiptItem = ReceiptItem(
     userId = "userId",
