@@ -12,6 +12,7 @@ data class ProductItem(
   val coinsReward: Int,
   val subscriptionPeriod: String,
   val freeTrialPeriod: String,
+  val promotions: List<PromotionItem>,
 ) {
 
   companion object {
@@ -26,6 +27,9 @@ data class ProductItem(
         coinsReward = product.coinsReward?.amount ?: 0,
         subscriptionPeriod = product.subscriptionPeriod ?: "Null",
         freeTrialPeriod = product.freeTrialPeriod ?: "Null",
+        promotions = product.promotions?.map { promotion ->
+          PromotionItem.from(promotion)
+        } ?: emptyList()
       )
     }
   }
