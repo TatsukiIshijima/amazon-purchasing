@@ -1,5 +1,6 @@
 # amazon-purchasing
 
+[![](https://jitpack.io/v/TatsukiIshijima/amazon-purchasing.svg)](https://jitpack.io/#TatsukiIshijima/amazon-purchasing)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## What's this?
