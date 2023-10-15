@@ -29,9 +29,9 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class AmazonPurchasingServiceImpl(
+class AmazonPurchasingClientImpl(
   private val context: Context,
-) : AmazonPurchasingService, PurchasingListener {
+) : AmazonPurchasingClient, PurchasingListener {
 
   private lateinit var requestUserDataId: RequestId
   private lateinit var requestProductDataId: RequestId

@@ -5,7 +5,7 @@ import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.UserData
 import com.tatsuki.purchasing.feature.model.AmazonPurchasedReceipt
 
-interface AmazonPurchasingService {
+interface AmazonPurchasingClient {
 
   fun registerPurchasingService()
 
