@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "amazon-purchasing"
 include ':app'
 include ':feature'
+include ':core'
