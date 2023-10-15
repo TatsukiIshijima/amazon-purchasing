@@ -32,8 +32,8 @@ android {
 }
 
 dependencies {
+  implementation(project(":core"))
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
-  api("com.amazon.device:amazon-appstore-sdk:3.0.4")
   testImplementation("junit:junit:4.13.2")
 }
 
