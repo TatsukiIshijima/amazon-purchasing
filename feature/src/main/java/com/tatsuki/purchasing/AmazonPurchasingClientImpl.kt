@@ -2,7 +2,6 @@ package com.tatsuki.purchasing
 
 import android.content.Context
 import com.amazon.device.iap.PurchasingListener
-import com.amazon.device.iap.PurchasingService
 import com.amazon.device.iap.model.FulfillmentResult
 import com.amazon.device.iap.model.Product
 import com.amazon.device.iap.model.ProductDataResponse
@@ -20,6 +19,7 @@ import com.tatsuki.purchasing.AmazonPurchaseServiceException.NotSupportedExcepti
 import com.tatsuki.purchasing.AmazonPurchaseServiceException.PendingException
 import com.tatsuki.purchasing.AmazonPurchaseServiceException.PurchaseFailedException
 import com.tatsuki.purchasing.AmazonPurchaseServiceException.PurchaseUpdatesFailedException
+import com.tatsuki.purchasing.core.AmazonPurchasingService
 import com.tatsuki.purchasing.feature.listener.OnAmazonProductDataListener
 import com.tatsuki.purchasing.feature.listener.OnAmazonPurchaseListener
 import com.tatsuki.purchasing.feature.listener.OnAmazonPurchaseUpdatesListener
@@ -31,6 +31,7 @@ import kotlin.coroutines.resumeWithException
 
 class AmazonPurchasingClientImpl(
   private val context: Context,
+  private val amazonPurchasingService: AmazonPurchasingService,
 ) : AmazonPurchasingClient, PurchasingListener {
 
   private lateinit var requestUserDataId: RequestId
@@ -48,7 +49,7 @@ class AmazonPurchasingClientImpl(
     mutableMapOf()
 
   override fun registerPurchasingService() {
-    PurchasingService.registerListener(context, this)
+    amazonPurchasingService.registerListener(context, this)
   }
 
   private fun addOnAmazonUserDataListener(
@@ -97,7 +98,7 @@ class AmazonPurchasingClientImpl(
         removeOnAmazonUserDataListener(requestUserDataId)
       }
       addOnAmazonUserDataListener(requestUserDataId, onAmazonUserDataListener)
-      PurchasingService.getUserData()
+      amazonPurchasingService.getUserData()
     }
   }
 
@@ -149,7 +150,7 @@ class AmazonPurchasingClientImpl(
         removeOnAmazonProductDataListener(requestProductDataId)
       }
       addOnAmazonProductDataListener(requestProductDataId, onAmazonProductDataListener)
-      PurchasingService.getProductData(productSkus)
+      amazonPurchasingService.getProductData(productSkus)
     }
   }
 
@@ -230,7 +231,7 @@ class AmazonPurchasingClientImpl(
         removeOnAmazonPurchaseListener(requestPurchaseId)
       }
       addOnAmazonPurchaseListener(requestPurchaseId, onAmazonPurchaseListener)
-      PurchasingService.purchase(productSku)
+      amazonPurchasingService.purchase(productSku)
     }
   }
 
@@ -239,7 +240,7 @@ class AmazonPurchasingClientImpl(
   }
 
   override fun notifyFulfillment(receiptId: String, fulfillmentResult: FulfillmentResult) {
-    PurchasingService.notifyFulfillment(receiptId, fulfillmentResult)
+    amazonPurchasingService.notifyFulfillment(receiptId, fulfillmentResult)
   }
 
   override suspend fun getPurchaseUpdates(requestAll: Boolean): List<AmazonPurchasedReceipt> {
@@ -259,7 +260,7 @@ class AmazonPurchasingClientImpl(
                 }
               )
               if (purchaseUpdatesResponse.hasMore()) {
-                PurchasingService.getPurchaseUpdates(false)
+                amazonPurchasingService.getPurchaseUpdates(false)
               } else {
                 removeOnPurchaseUpdatesListener(requestPurchaseUpdatesId)
                 continuation.resume(amazonPurchasedReceipts)
@@ -291,7 +292,7 @@ class AmazonPurchasingClientImpl(
         removeOnPurchaseUpdatesListener(requestPurchaseUpdatesId)
       }
       addOnPurchaseUpdatesListener(requestPurchaseUpdatesId, onAmazonPurchaseUpdatesListener)
-      PurchasingService.getPurchaseUpdates(requestAll)
+      amazonPurchasingService.getPurchaseUpdates(requestAll)
     }
   }
 

@@ -3,6 +3,8 @@ package com.tatsuki.amazonpurchasingsample.module
 import android.content.Context
 import com.tatsuki.purchasing.AmazonPurchasingClient
 import com.tatsuki.purchasing.AmazonPurchasingClientImpl
+import com.tatsuki.purchasing.AmazonPurchasingServiceImpl
+import com.tatsuki.purchasing.core.AmazonPurchasingService
 
 import dagger.Module
 import dagger.Provides
@@ -17,9 +19,16 @@ object AmazonModule {
 
   @Provides
   @Singleton
+  fun provideAmazonPurchasingService(): AmazonPurchasingService {
+    return AmazonPurchasingServiceImpl()
+  }
+
+  @Provides
+  @Singleton
   fun provideAmazonPurchasingClient(
     @ApplicationContext context: Context,
+    purchasingService: AmazonPurchasingService
   ): AmazonPurchasingClient {
-    return AmazonPurchasingClientImpl(context)
+    return AmazonPurchasingClientImpl(context, purchasingService)
   }
 }
