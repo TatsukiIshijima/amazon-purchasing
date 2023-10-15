@@ -17,3 +17,4 @@ rootProject.name = "amazon-purchasing"
 include ':app'
 include ':feature'
 include ':core'
+include ':fake'
