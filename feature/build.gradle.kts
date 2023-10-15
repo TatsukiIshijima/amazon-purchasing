@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-  namespace = "com.tatsuki.amazon"
+  namespace = "com.tatsuki.purchasing.feature"
   compileSdk = 34
 
   defaultConfig {

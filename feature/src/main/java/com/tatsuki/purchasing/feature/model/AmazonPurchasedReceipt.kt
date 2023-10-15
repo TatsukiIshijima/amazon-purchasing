@@ -1,4 +1,4 @@
-package com.tatsuki.purchasing
+package com.tatsuki.purchasing.feature.model
 
 import com.amazon.device.iap.model.Receipt
 import com.amazon.device.iap.model.UserData
