@@ -1,4 +1,4 @@
-package com.tatsuki.amazon.purchasing
+package com.tatsuki.purchasing
 
 sealed class AmazonPurchaseServiceException(
   override val message: String,

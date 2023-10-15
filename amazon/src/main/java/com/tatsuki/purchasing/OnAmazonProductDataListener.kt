@@ -1,4 +1,4 @@
-package com.tatsuki.amazon.purchasing
+package com.tatsuki.purchasing
 
 import com.amazon.device.iap.model.ProductDataResponse
 

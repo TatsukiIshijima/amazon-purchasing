@@ -1,4 +1,4 @@
-package com.tatsuki.amazon.purchasing
+package com.tatsuki.purchasing
 
 import android.content.Context
 import com.amazon.device.iap.PurchasingListener
@@ -11,15 +11,15 @@ import com.amazon.device.iap.model.PurchaseUpdatesResponse
 import com.amazon.device.iap.model.RequestId
 import com.amazon.device.iap.model.UserData
 import com.amazon.device.iap.model.UserDataResponse
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.AlreadyPurchasedException
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.Companion.DEFAULT_STATUS_CODE
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.GetProductDataFailedException
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.GetUserDataFailedException
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.InvalidSkuException
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.NotSupportedException
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.PendingException
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.PurchaseFailedException
-import com.tatsuki.amazon.purchasing.AmazonPurchaseServiceException.PurchaseUpdatesFailedException
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.AlreadyPurchasedException
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.Companion.DEFAULT_STATUS_CODE
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.GetProductDataFailedException
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.GetUserDataFailedException
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.InvalidSkuException
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.NotSupportedException
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.PendingException
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.PurchaseFailedException
+import com.tatsuki.purchasing.AmazonPurchaseServiceException.PurchaseUpdatesFailedException
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException

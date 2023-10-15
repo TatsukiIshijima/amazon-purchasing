@@ -1,6 +1,6 @@
 package com.tatsuki.amazonpurchasingsample.model
 
-import com.tatsuki.amazon.purchasing.AmazonPurchasedReceipt
+import com.tatsuki.purchasing.AmazonPurchasedReceipt
 
 data class ReceiptItem(
   val userId: String,
