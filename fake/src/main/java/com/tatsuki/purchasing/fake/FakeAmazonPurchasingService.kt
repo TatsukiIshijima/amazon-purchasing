@@ -8,23 +8,31 @@ import com.tatsuki.purchasing.core.AmazonPurchasingService
 
 class FakeAmazonPurchasingService : AmazonPurchasingService {
 
+  private lateinit var purchasingListener: PurchasingListener
+  private var isEnablePendingPurchases = false
+
   override fun registerListener(context: Context, listener: PurchasingListener) {
-    TODO("Not yet implemented")
+    this.purchasingListener = listener
   }
 
   override fun enablePendingPurchases() {
-    TODO("Not yet implemented")
+    isEnablePendingPurchases = true
   }
 
   override fun getUserData(): RequestId {
+    val requestId = RequestId()
+    purchasingListener.onUserDataResponse(null)
+    return requestId
     TODO("Not yet implemented")
   }
 
   override fun getProductData(skus: Set<String>): RequestId {
+    purchasingListener.onProductDataResponse(null)
     TODO("Not yet implemented")
   }
 
   override fun purchase(sku: String): RequestId {
+    purchasingListener.onPurchaseResponse(null)
     TODO("Not yet implemented")
   }
 
@@ -33,6 +41,7 @@ class FakeAmazonPurchasingService : AmazonPurchasingService {
   }
 
   override fun getPurchaseUpdates(requestAll: Boolean): RequestId {
+    purchasingListener.onPurchaseUpdatesResponse(null)
     TODO("Not yet implemented")
   }
 }
