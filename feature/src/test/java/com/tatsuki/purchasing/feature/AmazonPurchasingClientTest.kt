@@ -3,6 +3,7 @@ package com.tatsuki.purchasing.feature
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.tatsuki.purchasing.AmazonPurchasingClientImpl
+import com.tatsuki.purchasing.fake.Consts
 import com.tatsuki.purchasing.fake.FakeAmazonPurchasingService
 import com.tatsuki.purchasing.fake.FakeServiceStatus
 import kotlinx.coroutines.test.runTest
@@ -29,7 +30,12 @@ class AmazonPurchasingClientTest {
   @Test
   fun purchaseSubscription() = runTest {
     fakeAmazonPurchasingService.setup(FakeServiceStatus.Available)
+
     val amazonUserData = amazonPurchasingClient.getUserData()
     assert(amazonUserData.marketplace == "JP")
+
+    val productData = amazonPurchasingClient.getProductData(setOf(Consts.SUBSCRIPTION_SKU))
+    assert(productData.size == 1)
+    assert(productData[Consts.SUBSCRIPTION_SKU]?.sku == Consts.SUBSCRIPTION_SKU)
   }
 }
