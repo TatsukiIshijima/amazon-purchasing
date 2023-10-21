@@ -28,6 +28,35 @@ class FakeAmazonPurchasingService : AmazonPurchasingService {
   // Amazon user account
   private var amazonUser = FakeAmazonUser()
 
+  // Sku list of subscription products defined in the Amazon developer console.
+  private val subscriptionSkus = listOf(Consts.SUBSCRIPTION_SKU)
+
+  // Sku list of in-app products defined in the Amazon Developer console.
+  private val inAppSkus = listOf(Consts.IN_APP_SKU)
+
+  // List of products defined in the Amazon Developer console.
+  private val products = subscriptionSkus.mapIndexed { index, sku ->
+    ProductBuilder()
+      .apply {
+        this.sku = sku
+        price = "${1000 * (index + 1)}"
+        title = "test_subscription_title_${index + 1}"
+        description = "test_subscription_description_${index + 1}"
+        productType = ProductType.SUBSCRIPTION
+        smallIconUrl = "https://test.small.icon.url_${index + 1}"
+      }.build()
+  } + inAppSkus.mapIndexed { index, sku ->
+    ProductBuilder()
+      .apply {
+        this.sku = sku
+        price = "${100 * (index + 1)}"
+        title = "test_in_app_title_${index + 1}"
+        description = "test_in_app_description_${index + 1}"
+        productType = ProductType.CONSUMABLE
+        smallIconUrl = "https://test.small.icon.url_${index + 1}"
+      }.build()
+  }
+
   override fun registerListener(context: Context, listener: PurchasingListener) {
     this.purchasingListener = listener
   }
@@ -59,25 +88,7 @@ class FakeAmazonPurchasingService : AmazonPurchasingService {
   override fun getProductData(skus: Set<String>): RequestId {
     val (requestStatus, productData) = when (status) {
       FakeServiceStatus.Available -> {
-        val subscriptionProduct = ProductBuilder()
-          .apply {
-            sku = Consts.SUBSCRIPTION_SKU
-            price = "1000"
-            title = "test_subscription_title"
-            description = "test_subscription_description"
-            productType = ProductType.SUBSCRIPTION
-            smallIconUrl = "https://"
-          }.build()
-        val inAppProduct = ProductBuilder()
-          .apply {
-            sku = Consts.IN_APP_SKU
-            price = "100"
-            title = "test_in_app_title"
-            description = "test_in_app_description"
-            productType = ProductType.CONSUMABLE
-            smallIconUrl = "https://"
-          }.build()
-        val productData = listOf(subscriptionProduct, inAppProduct)
+        val productData = products
           .filter { product ->
             skus.any { sku ->
               product.sku == sku
@@ -103,6 +114,17 @@ class FakeAmazonPurchasingService : AmazonPurchasingService {
   }
 
   override fun purchase(sku: String): RequestId {
+//    val purchaseResponseBuilder = PurchaseResponseBuilder()
+//      .apply {
+//        userData = ,
+//        requestId = RequestId()
+//        requestStatus = ,
+//        receipt = ReceiptBuilder(),
+//      }
+//      .setUserData()
+//      .setRequestId()
+//      .setRequestStatus()
+//      .setReceipt()
     purchasingListener.onPurchaseResponse(null)
     TODO("Not yet implemented")
   }
