@@ -2,10 +2,13 @@ package com.tatsuki.purchasing.feature
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import com.amazon.device.iap.model.FulfillmentResult
 import com.tatsuki.purchasing.AmazonPurchasingClientImpl
 import com.tatsuki.purchasing.fake.Consts
 import com.tatsuki.purchasing.fake.FakeAmazonPurchasingService
 import com.tatsuki.purchasing.fake.FakeServiceStatus
+import com.tatsuki.purchasing.fake.db.FakeAmazonReceiptDb
+import com.tatsuki.purchasing.fake.db.FakeAmazonReceiptDbClient
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -16,13 +19,15 @@ import org.robolectric.RobolectricTestRunner
 class AmazonPurchasingClientTest {
 
   private lateinit var context: Context
+  private lateinit var fakeAmazonReceiptDb: FakeAmazonReceiptDb
   private lateinit var fakeAmazonPurchasingService: FakeAmazonPurchasingService
   private lateinit var amazonPurchasingClient: AmazonPurchasingClientImpl
 
   @Before
   fun setup() {
     context = ApplicationProvider.getApplicationContext()
-    fakeAmazonPurchasingService = FakeAmazonPurchasingService()
+    fakeAmazonReceiptDb = FakeAmazonReceiptDbClient()
+    fakeAmazonPurchasingService = FakeAmazonPurchasingService(fakeAmazonReceiptDb)
     amazonPurchasingClient = AmazonPurchasingClientImpl(context, fakeAmazonPurchasingService)
     amazonPurchasingClient.registerPurchasingService()
   }
@@ -31,11 +36,44 @@ class AmazonPurchasingClientTest {
   fun purchaseSubscription() = runTest {
     fakeAmazonPurchasingService.setup(FakeServiceStatus.Available)
 
+    // Get current amazon account user
     val amazonUserData = amazonPurchasingClient.getUserData()
     assert(amazonUserData.marketplace == "JP")
 
-    val productData = amazonPurchasingClient.getProductData(setOf(Consts.SUBSCRIPTION_SKU))
-    assert(productData.size == 1)
-    assert(productData[Consts.SUBSCRIPTION_SKU]?.sku == Consts.SUBSCRIPTION_SKU)
+    // Get product data
+    val targetSku1 = "${Consts.SUBSCRIPTION_SKU_PREFIX}_1"
+    val targetSku2 = "${Consts.SUBSCRIPTION_SKU_PREFIX}_2"
+    val productData = amazonPurchasingClient.getProductData(setOf(targetSku1, targetSku2))
+    assert(productData.size == 2)
+    assert(productData[targetSku1]?.sku == targetSku1)
+    assert(productData[targetSku2]?.sku == targetSku2)
+
+    // Select a product to purchase and purchase it.
+    val purchasedReceipt1 = amazonPurchasingClient.purchase(productData[targetSku1]!!.sku)
+    // Fulfill the purchase.
+    amazonPurchasingClient.notifyFulfillment(
+      purchasedReceipt1.receipt.receiptId,
+      FulfillmentResult.FULFILLED
+    )
+    val receiptData = fakeAmazonReceiptDb.getReceiptData(purchasedReceipt1.receipt.receiptId)
+    assert(receiptData?.fulfillmentResult == FulfillmentResult.FULFILLED)
+
+    // Get receipts.
+    val purchaseUpdatesFirstTime = amazonPurchasingClient.getPurchaseUpdates()
+    assert(purchaseUpdatesFirstTime.size == 1)
+    assert(purchaseUpdatesFirstTime.first().receipt.receiptId == purchasedReceipt1.receipt.receiptId)
+
+    // Get receipts again.
+    // However, no value is returned because getPurchaseUpdates has been called previously.
+    val purchaseUpdatesSecondTime = amazonPurchasingClient.getPurchaseUpdates()
+    assert(purchaseUpdatesSecondTime.isEmpty())
+
+    // Purchase subscription product again.
+    val purchasedReceipt2 = amazonPurchasingClient.purchase(productData[targetSku2]!!.sku)
+
+    // Get receipts again.
+    val purchaseUpdatesThirdTime = amazonPurchasingClient.getPurchaseUpdates()
+    assert(purchaseUpdatesThirdTime.size == 1)
+    assert(purchaseUpdatesThirdTime.first().receipt.receiptId == purchasedReceipt2.receipt.receiptId)
   }
 }
