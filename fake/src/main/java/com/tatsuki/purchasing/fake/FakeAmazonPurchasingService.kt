@@ -2,7 +2,6 @@ package com.tatsuki.purchasing.fake
 
 import android.content.Context
 import com.amazon.device.iap.PurchasingListener
-import com.amazon.device.iap.internal.model.ProductBuilder
 import com.amazon.device.iap.internal.model.ProductDataResponseBuilder
 import com.amazon.device.iap.internal.model.PurchaseResponseBuilder
 import com.amazon.device.iap.internal.model.PurchaseUpdatesResponseBuilder
@@ -33,40 +32,11 @@ class FakeAmazonPurchasingService(
 
   private lateinit var purchasingListener: PurchasingListener
   private var isEnablePendingPurchases = false
-  private var purchaseUpdatesPageNumber = 1
+  private var purchaseUpdatesLastIndex = 0
   private val purchaseUpdatesPageSize = 3
 
   // Current amazon user account
   private var amazonUser = FakeAmazonUser()
-
-  // Sku list of subscription products defined in the Amazon developer console.
-  private val subscriptionSkus = listOf(Consts.SUBSCRIPTION_SKU)
-
-  // Sku list of in-app products defined in the Amazon Developer console.
-  private val inAppSkus = listOf(Consts.IN_APP_SKU)
-
-  // List of products defined in the Amazon Developer console.
-  private val products = subscriptionSkus.mapIndexed { index, sku ->
-    ProductBuilder()
-      .apply {
-        this.sku = sku
-        price = "${1000 * (index + 1)}"
-        title = "test_subscription_title_${index + 1}"
-        description = "test_subscription_description_${index + 1}"
-        productType = ProductType.SUBSCRIPTION
-        smallIconUrl = "https://test.small.icon.url_${index + 1}"
-      }.build()
-  } + inAppSkus.mapIndexed { index, sku ->
-    ProductBuilder()
-      .apply {
-        this.sku = sku
-        price = "${100 * (index + 1)}"
-        title = "test_in_app_title_${index + 1}"
-        description = "test_in_app_description_${index + 1}"
-        productType = ProductType.CONSUMABLE
-        smallIconUrl = "https://test.small.icon.url_${index + 1}"
-      }.build()
-  }
 
   override fun registerListener(context: Context, listener: PurchasingListener) {
     this.purchasingListener = listener
@@ -98,7 +68,7 @@ class FakeAmazonPurchasingService(
   override fun getProductData(skus: Set<String>): RequestId {
     val (requestStatus, productData) = when (status) {
       FakeServiceStatus.Available -> {
-        val productData = products
+        val productData = Consts.ALL_PRODUCTS
           .filter { product ->
             skus.any { sku ->
               product.sku == sku
@@ -125,7 +95,7 @@ class FakeAmazonPurchasingService(
   override fun purchase(sku: String): RequestId {
     when (status) {
       FakeServiceStatus.Available -> {
-        if (!products.any { it.sku == sku }) {
+        if (!Consts.ALL_PRODUCTS.any { it.sku == sku }) {
           val purchaseResponse = PurchaseResponseBuilder()
             .apply {
               requestId = RequestId()
@@ -134,7 +104,7 @@ class FakeAmazonPurchasingService(
           purchasingListener.onPurchaseResponse(purchaseResponse)
           return purchaseResponse.requestId
         }
-        val targetProduct = products.first { it.sku == sku }
+        val targetProduct = Consts.ALL_PRODUCTS.first { it.sku == sku }
         val receiptData = FakeAmazonReceiptData.create(
           userId = amazonUser.userData.userId,
           sku = targetProduct.sku,
@@ -186,19 +156,21 @@ class FakeAmazonPurchasingService(
           userReceiptDataList to false
         } else {
           val receiptDataList = fakeAmazonReceiptDb.getReceiptDataList(amazonUser.userData.userId)
-          val startIndex = (purchaseUpdatesPageNumber - 1) * purchaseUpdatesPageSize
+
+          val startIndex = purchaseUpdatesLastIndex
           val endIndex = minOf(startIndex + purchaseUpdatesPageSize, receiptDataList.size)
-          val hasMore = startIndex < receiptDataList.size
-          if (hasMore) {
-            purchaseUpdatesPageNumber++
+
+          val pagingReceiptData = mutableListOf<FakeAmazonReceiptData>()
+          for (i in startIndex until endIndex) {
+            pagingReceiptData.add(receiptDataList[i])
           }
-          val userReceiptDataList = receiptDataList.subList(startIndex, endIndex)
-          userReceiptDataList to hasMore
+          purchaseUpdatesLastIndex = endIndex
+          pagingReceiptData.toList() to (endIndex < receiptDataList.size)
         }
 
         val purchaseUpdatesResponse = PurchaseUpdatesResponseBuilder()
           .setRequestId(RequestId())
-          .setRequestStatus(PurchaseUpdatesResponse.RequestStatus.FAILED)
+          .setRequestStatus(PurchaseUpdatesResponse.RequestStatus.SUCCESSFUL)
           .setUserData(amazonUser.userData)
           .setHasMore(hasMore)
           .setReceipts(userReceiptDataList.map { it.receipt })
