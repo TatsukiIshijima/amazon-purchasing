@@ -18,6 +18,7 @@ data class FakeAmazonReceiptData(
       userId: String,
       sku: String,
       productType: ProductType,
+      purchaseDate: Date = Date(),
     ): FakeAmazonReceiptData {
       return FakeAmazonReceiptData(
         userId = userId,
@@ -25,7 +26,7 @@ data class FakeAmazonReceiptData(
           .setReceiptId(generateRandomString(15))
           .setSku(sku)
           .setProductType(productType)
-          .setPurchaseDate(Date())
+          .setPurchaseDate(purchaseDate)
           .build(),
         fulfillmentResult = FulfillmentResult.UNAVAILABLE
       )
