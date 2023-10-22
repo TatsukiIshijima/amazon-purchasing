@@ -1,8 +1,15 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
   id("com.android.library")
   id("org.jetbrains.kotlin.android")
   id("maven-publish")
 }
+
+val libVersionsPropertiesFile = rootProject.file("libversions.properties")
+val libVersionsProperties = Properties()
+libVersionsProperties.load(FileInputStream(libVersionsPropertiesFile))
 
 android {
   namespace = "com.tatsuki.purchasing.feature"
@@ -53,9 +60,7 @@ dependencies {
 publishing {
   publications {
     register<MavenPublication>("release") {
-      groupId = "com.github.TatsukiIshijima"
-      artifactId = "amazon-purchasing"
-      version = "0.0.1"
+      version = libVersionsProperties["VERSION_NAME"] as String
 
       afterEvaluate {
         from(components["release"])
