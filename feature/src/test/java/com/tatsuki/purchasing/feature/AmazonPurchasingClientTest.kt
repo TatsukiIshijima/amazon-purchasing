@@ -76,4 +76,42 @@ class AmazonPurchasingClientTest {
     assert(purchaseUpdatesThirdTime.size == 1)
     assert(purchaseUpdatesThirdTime.first().receipt.receiptId == purchasedReceipt2.receipt.receiptId)
   }
+
+  @Test
+  fun purchaseConsumableItem() = runTest {
+    fakeAmazonPurchasingService.setup(FakeServiceStatus.Available)
+
+    // Get current amazon account user
+    val amazonUserData = amazonPurchasingClient.getUserData()
+    assert(amazonUserData.marketplace == "JP")
+
+    // Get product data
+    val targetSku1 = "${Consts.IN_APP_SKU_PREFIX}_1"
+    val targetSku2 = "${Consts.IN_APP_SKU_PREFIX}_2"
+    val productData = amazonPurchasingClient.getProductData(setOf(targetSku1, targetSku2))
+    assert(productData.size == 2)
+    assert(productData[targetSku1]?.sku == targetSku1)
+    assert(productData[targetSku2]?.sku == targetSku2)
+
+    // Select a product to purchase and purchase it.
+    val purchasedReceipt1 = amazonPurchasingClient.purchase(productData[targetSku1]!!.sku)
+    // Fulfill the purchase.
+    amazonPurchasingClient.notifyFulfillment(
+      purchasedReceipt1.receipt.receiptId,
+      FulfillmentResult.FULFILLED
+    )
+
+    // Get receipts. (Consumable items are not returned if transaction complete by called notifyFulfilment.)
+    // https://developer.amazon.com/ja/docs/in-app-purchasing/iap-implement-iap.html#getpurchaseupdates-responses
+    val purchaseUpdatesFirstTime = amazonPurchasingClient.getPurchaseUpdates()
+    assert(purchaseUpdatesFirstTime.isEmpty())
+
+    // Purchase consumable item again but not fulfill.
+    val purchasedReceipt2 = amazonPurchasingClient.purchase(productData[targetSku2]!!.sku)
+
+    // Get receipts. (Consumable items are returned if transaction not complete.)
+    val purchaseUpdatesSecondTime = amazonPurchasingClient.getPurchaseUpdates()
+    assert(purchaseUpdatesSecondTime.size == 1)
+    assert(purchaseUpdatesSecondTime.first().receipt.receiptId == purchasedReceipt2.receipt.receiptId)
+  }
 }

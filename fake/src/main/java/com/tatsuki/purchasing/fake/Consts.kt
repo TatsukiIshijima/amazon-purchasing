@@ -9,7 +9,7 @@ object Consts {
   private const val SUBSCRIPTION_PRODUCT_DESCRIPTION_PREFIX = "test_subscription_description"
   private const val SUBSCRIPTION_PRODUCT_SMALL_ICON_URL_PREFIX = "https://test.small.icon.url"
 
-  private const val IN_APP_SKU_PREFIX = "in_app_sku"
+  const val IN_APP_SKU_PREFIX = "in_app_sku"
   private const val IN_APP_PRODUCT_TITLE_PREFIX = "test_in_app_title"
   private const val IN_APP_PRODUCT_DESCRIPTION_PREFIX = "test_in_app_description"
   private const val IN_APP_PRODUCT_SMALL_ICON_URL_PREFIX = "https://test.small.icon.url"
