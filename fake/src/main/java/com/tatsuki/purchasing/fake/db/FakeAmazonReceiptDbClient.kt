@@ -22,6 +22,15 @@ class FakeAmazonReceiptDbClient : FakeAmazonReceiptDb {
     }
   }
 
+  override fun update(receiptData: FakeAmazonReceiptData) {
+    val index = mutableReceiptDataList.indexOfFirst {
+      it.receipt.receiptId == receiptData.receipt.receiptId
+    }
+    if (index != -1) {
+      mutableReceiptDataList[index] = receiptData
+    }
+  }
+
   override fun remove(receiptId: String) {
     val targetReceiptData = mutableReceiptDataList.firstOrNull {
       it.receipt.receiptId == receiptId

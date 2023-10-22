@@ -12,6 +12,8 @@ interface FakeAmazonReceiptDb {
 
   fun getReceiptData(receiptId: String): FakeAmazonReceiptData?
 
+  fun update(receiptData: FakeAmazonReceiptData)
+
   fun remove(receiptId: String)
 
   fun clear()
