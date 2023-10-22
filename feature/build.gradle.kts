@@ -29,12 +29,25 @@ android {
   kotlinOptions {
     jvmTarget = "1.8"
   }
+  testOptions {
+    unitTests {
+      all {
+        it.apply {
+          jvmArgs("-noverify")
+        }
+      }
+    }
+  }
 }
 
 dependencies {
+  implementation(project(":core"))
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
-  api("com.amazon.device:amazon-appstore-sdk:3.0.4")
+  testImplementation(project(":fake"))
   testImplementation("junit:junit:4.13.2")
+  testImplementation("androidx.test.ext:junit-ktx:1.1.5")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
+  testImplementation("org.robolectric:robolectric:4.9")
 }
 
 publishing {
