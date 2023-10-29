@@ -1,0 +1,258 @@
+{
+  "test.subscription.item.5.monthly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem5",
+    "itemType": "SUBSCRIPTION",
+    "price": 200.0,
+    "description": "Dormant users promotion",
+    "languageTitleMap": {
+      "US": "TestSubscriptionItem5"
+    },
+    "languageDescriptionMap": {
+      "US": "Dormant users promotion"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.5",
+    "term": "Monthly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 100.0,
+            "promotionPricePeriod": "Monthly",
+            "promotionPriceCycles": 1
+          }
+        ]
+      }
+    ]
+  },
+  "test.subscription.item.4.monthly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem4",
+    "itemType": "SUBSCRIPTION",
+    "price": 200.0,
+    "description": "Promotion is future period.",
+    "languageTitleMap": {
+      "JP": "TestSubscriptionItem4",
+      "US": "TestSubscriptionItem4"
+    },
+    "languageDescriptionMap": {
+      "JP": "Promotion is future period.",
+      "US": "Promotion is future period."
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.4",
+    "term": "Monthly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 100.0,
+            "promotionPricePeriod": "Monthly",
+            "promotionPriceCycles": 1
+          }
+        ]
+      }
+    ]
+  },
+  "test.subscription.item.3.weekly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem3",
+    "itemType": "SUBSCRIPTION",
+    "price": 150.0,
+    "description": "Monthly subscription(1month free trial and 1 month promotion)\nWeekly subscription(1 week free trial and 1 week promotion)",
+    "languageTitleMap": {
+      "JP": "TestSubscriptionItem3",
+      "US": "TestSubscriptionItem3"
+    },
+    "languageDescriptionMap": {
+      "JP": "Monthly subscription(1month free trial and 1 month promotion)\nWeekly subscription(1 week free trial and 1 week promotion)",
+      "US": "Monthly subscription(1month free trial and 1 month promotion)\nWeekly subscription(1 week free trial and 1 week promotion)"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.3",
+    "term": "Weekly",
+    "freeTrialPeriod": "Weekly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 100.0,
+            "promotionPricePeriod": "Weekly",
+            "promotionPriceCycles": 1
+          }
+        ]
+      }
+    ]
+  },
+  "test.subscription.item.3.monthly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem3",
+    "itemType": "SUBSCRIPTION",
+    "price": 200.0,
+    "description": "Monthly subscription(1month free trial and 1 month promotion)\nWeekly subscription(1 week free trial and 1 week promotion)",
+    "languageTitleMap": {
+      "JP": "TestSubscriptionItem3",
+      "US": "TestSubscriptionItem3"
+    },
+    "languageDescriptionMap": {
+      "JP": "Monthly subscription(1month free trial and 1 month promotion)\nWeekly subscription(1 week free trial and 1 week promotion)",
+      "US": "Monthly subscription(1month free trial and 1 month promotion)\nWeekly subscription(1 week free trial and 1 week promotion)"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.3",
+    "term": "Monthly",
+    "freeTrialPeriod": "Monthly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 100.0,
+            "promotionPricePeriod": "Monthly",
+            "promotionPriceCycles": 1
+          }
+        ]
+      }
+    ]
+  },
+  "test.subscription.item.2.monthly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem2",
+    "itemType": "SUBSCRIPTION",
+    "price": 200.0,
+    "description": "Monthly subscription (Regular payments for 3 months)\nWeekly subscription (Regular payments for 2 weeks)",
+    "languageTitleMap": {
+      "JP": "TestSubscriptionItem2",
+      "US": "TestSubscriptionItem2"
+    },
+    "languageDescriptionMap": {
+      "JP": "Monthly subscription (Regular payments for 3 months)\nWeekly subscription (Regular payments for 2 weeks)",
+      "US": "Monthly subscription (Regular payments for 3 months)\nWeekly subscription (Regular payments for 2 weeks)"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.2",
+    "term": "Monthly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 180.0,
+            "promotionPricePeriod": "Monthly",
+            "promotionPriceCycles": 3
+          }
+        ]
+      }
+    ]
+  },
+  "test.subscription.item.2.weekly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem2",
+    "itemType": "SUBSCRIPTION",
+    "price": 150.0,
+    "description": "Monthly subscription (Regular payments for 3 months)\nWeekly subscription (Regular payments for 2 weeks)",
+    "languageTitleMap": {
+      "JP": "TestSubscriptionItem2",
+      "US": "TestSubscriptionItem2"
+    },
+    "languageDescriptionMap": {
+      "JP": "Monthly subscription (Regular payments for 3 months)\nWeekly subscription (Regular payments for 2 weeks)",
+      "US": "Monthly subscription (Regular payments for 3 months)\nWeekly subscription (Regular payments for 2 weeks)"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.2",
+    "term": "Weekly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 100.0,
+            "promotionPricePeriod": "Weekly",
+            "promotionPriceCycles": 2
+          }
+        ]
+      }
+    ]
+  },
+  "test.subscription.item.1.monthly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem1",
+    "itemType": "SUBSCRIPTION",
+    "price": 100.0,
+    "description": "Monthly subscription (Payment for 3 months at onetime)\nWeekly subscription (Payment for 2 weeks at onetime)\n",
+    "languageTitleMap": {
+      "JP": "TestSubscriptionItem1",
+      "US": "TestSubscriptionItem1"
+    },
+    "languageDescriptionMap": {
+      "JP": "Monthly subscription (Payment for 3 months at onetime)\nWeekly subscription (Payment for 2 weeks at onetime)",
+      "US": "Monthly subscription (Payment for 3 months at onetime)\nWeekly subscription (Payment for 2 weeks at onetime)\n"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.1",
+    "term": "Monthly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 280.0,
+            "promotionPricePeriod": "Quarterly",
+            "promotionPriceCycles": 1
+          }
+        ]
+      }
+    ]
+  },
+  "test.subscription.item.1.weekly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem1",
+    "itemType": "SUBSCRIPTION",
+    "price": 170.0,
+    "description": "Monthly subscription (Payment for 3 months at onetime)\nWeekly subscription (Payment for 2 weeks at onetime)\n",
+    "languageTitleMap": {
+      "JP": "TestSubscriptionItem1",
+      "US": "TestSubscriptionItem1"
+    },
+    "languageDescriptionMap": {
+      "JP": "Monthly subscription (Payment for 3 months at onetime)\nWeekly subscription (Payment for 2 weeks at onetime)",
+      "US": "Monthly subscription (Payment for 3 months at onetime)\nWeekly subscription (Payment for 2 weeks at onetime)\n"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.1",
+    "term": "Weekly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 85.0,
+            "promotionPricePeriod": "BiWeekly",
+            "promotionPriceCycles": 1
+          }
+        ]
+      }
+    ]
+  }
+}
