@@ -29,6 +29,36 @@
       }
     ]
   },
+  "test.subscription.item.5.weekly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem5",
+    "itemType": "SUBSCRIPTION",
+    "price": 200.0,
+    "description": "Dormant users promotion",
+    "languageTitleMap": {
+      "US": "TestSubscriptionItem5"
+    },
+    "languageDescriptionMap": {
+      "US": "Dormant users promotion"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.5",
+    "term": "Weekly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 100.0,
+            "promotionPricePeriod": "BiWeekly",
+            "promotionPriceCycles": 1
+          }
+        ]
+      }
+    ]
+  },
   "test.subscription.item.4.monthly": {
     "smallIconUrl": "http://",
     "title": "TestSubscriptionItem4",
@@ -55,6 +85,38 @@
           {
             "promotionPrice": 100.0,
             "promotionPricePeriod": "Monthly",
+            "promotionPriceCycles": 1
+          }
+        ]
+      }
+    ]
+  },
+  "test.subscription.item.4.weekly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem4",
+    "itemType": "SUBSCRIPTION",
+    "price": 200.0,
+    "description": "Promotion is future period.",
+    "languageTitleMap": {
+      "JP": "TestSubscriptionItem4",
+      "US": "TestSubscriptionItem4"
+    },
+    "languageDescriptionMap": {
+      "JP": "Promotion is future period.",
+      "US": "Promotion is future period."
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item.4",
+    "term": "Weekly",
+    "promotions": [
+      {
+        "promotionType": "Introductory",
+        "promotionPlans": [
+          {
+            "promotionPrice": 100.0,
+            "promotionPricePeriod": "BiWeekly",
             "promotionPriceCycles": 1
           }
         ]
@@ -247,7 +309,7 @@
         "promotionType": "Introductory",
         "promotionPlans": [
           {
-            "promotionPrice": 85.0,
+            "promotionPrice": 150.0,
             "promotionPricePeriod": "BiWeekly",
             "promotionPriceCycles": 1
           }
