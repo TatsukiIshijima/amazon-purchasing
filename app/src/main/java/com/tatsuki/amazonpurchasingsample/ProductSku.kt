@@ -17,7 +17,9 @@ object ProductSku {
       "test.subscription.item.2.weekly",
       "test.subscription.item.3.monthly",
       "test.subscription.item.3.weekly",
+      "test.subscription.item.4.weekly",
       "test.subscription.item.4.monthly",
+      "test.subscription.item.5.weekly",
       "test.subscription.item.5.monthly",
     )
   )
