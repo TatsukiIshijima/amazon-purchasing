@@ -28,7 +28,7 @@ android {
     applicationId = "com.tatsuki.amazonpurchasingsample"
     minSdk = 21
     targetSdk = 33
-    versionCode = 1
+    versionCode = 2
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -87,10 +87,12 @@ dependencies {
   implementation("androidx.compose.material3:material3")
   implementation("com.google.dagger:hilt-android:2.44")
   implementation(project(":core"))
+//  implementation("com.github.TatsukiIshijima.amazon-purchasing:core:develop-SNAPSHOT")
   implementation(project(":feature"))
-  //  implementation("com.github.TatsukiIshijima:amazon-purchasing:0.0.1")
+//  implementation("com.github.TatsukiIshijima.amazon-purchasing:feature:develop-SNAPSHOT")
   kapt("com.google.dagger:hilt-android-compiler:2.44")
   testImplementation(project(":fake"))
+//  implementation("com.github.TatsukiIshijima.amazon-purchasing:fake:develop-SNAPSHOT")
   testImplementation("junit:junit:4.13.2")
   androidTestImplementation("androidx.test.ext:junit:1.1.5")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
