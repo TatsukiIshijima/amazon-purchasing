@@ -1,4 +1,76 @@
 {
+  "test.subscription.item7.monthly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem7",
+    "itemType": "SUBSCRIPTION",
+    "price": 200.0,
+    "description": "Weekly and monthly subscription",
+    "languageTitleMap": {
+      "US": "TestSubscriptionItem7"
+    },
+    "languageDescriptionMap": {
+      "US": "Weekly and monthly subscription"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item7",
+    "term": "Monthly"
+  },
+  "test.subscription.item7.weekly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem7",
+    "itemType": "SUBSCRIPTION",
+    "price": 300.0,
+    "description": "Weekly and monthly subscription",
+    "languageTitleMap": {
+      "US": "TestSubscriptionItem7"
+    },
+    "languageDescriptionMap": {
+      "US": "Weekly and monthly subscription"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item7",
+    "term": "Weekly"
+  },
+  "test.subscription.item6.weekly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem6",
+    "itemType": "SUBSCRIPTION",
+    "price": 200.0,
+    "description": "Weekly and monthly subscription",
+    "languageTitleMap": {
+      "US": "TestSubscriptionItem6"
+    },
+    "languageDescriptionMap": {
+      "US": "Weekly and monthly subscription"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item6",
+    "term": "Weekly"
+  },
+  "test.subscription.item6.monthly": {
+    "smallIconUrl": "http://",
+    "title": "TestSubscriptionItem6",
+    "itemType": "SUBSCRIPTION",
+    "price": 100.0,
+    "description": "Weekly and monthly subscription",
+    "languageTitleMap": {
+      "US": "TestSubscriptionItem6"
+    },
+    "languageDescriptionMap": {
+      "US": "Weekly and monthly subscription"
+    },
+    "currencyPriceMap": {
+      "US": 0.0
+    },
+    "subscriptionParent": "test.subscription.item6",
+    "term": "Monthly"
+  },
   "test.subscription.item.5.monthly": {
     "smallIconUrl": "http://",
     "title": "TestSubscriptionItem5",
