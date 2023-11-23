@@ -45,6 +45,7 @@ class MainTvActivity : ComponentActivity() {
       AppStoreSDKSampleTheme {
         // A surface container using the 'background' color from the theme
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+          // FIXME: Use Compose for TV
           MainScreen(
             header = {
               UserDataHeader(
