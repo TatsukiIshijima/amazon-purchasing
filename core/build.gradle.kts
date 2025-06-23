@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-  api("com.amazon.device:amazon-appstore-sdk:3.0.4")
+  api("com.amazon.device:amazon-appstore-sdk:3.0.7")
 }
 
 publishing {
