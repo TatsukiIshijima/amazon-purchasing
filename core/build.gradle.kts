@@ -2,9 +2,10 @@ import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-  id("com.android.library")
-  id("org.jetbrains.kotlin.android")
   id("maven-publish")
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.ksp)
 }
 
 val libVersionsPropertiesFile = rootProject.file("libversions.properties")
@@ -13,11 +14,10 @@ libVersionsProperties.load(FileInputStream(libVersionsPropertiesFile))
 
 android {
   namespace = "com.tatsuki.purchasing.core"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     minSdk = 21
-    targetSdk = 34
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-  api("com.amazon.device:amazon-appstore-sdk:3.0.4")
+  api(libs.amazon.appstore)
 }
 
 publishing {

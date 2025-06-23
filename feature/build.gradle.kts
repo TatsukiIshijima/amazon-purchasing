@@ -2,9 +2,10 @@ import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-  id("com.android.library")
-  id("org.jetbrains.kotlin.android")
   id("maven-publish")
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.ksp)
 }
 
 val libVersionsPropertiesFile = rootProject.file("libversions.properties")
@@ -13,11 +14,10 @@ libVersionsProperties.load(FileInputStream(libVersionsPropertiesFile))
 
 android {
   namespace = "com.tatsuki.purchasing.feature"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     minSdk = 21
-    targetSdk = 34
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
@@ -49,12 +49,12 @@ android {
 
 dependencies {
   implementation(project(":core"))
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+  implementation(libs.kotlinx.coroutines.core)
   testImplementation(project(":fake"))
-  testImplementation("junit:junit:4.13.2")
-  testImplementation("androidx.test.ext:junit-ktx:1.1.5")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
-  testImplementation("org.robolectric:robolectric:4.9")
+  testImplementation(libs.junit)
+  testImplementation(libs.androidx.junit.ktx)
+  testImplementation(libs.kotlinx.coroutines.test)
+  testImplementation(libs.robolectric)
 }
 
 publishing {
