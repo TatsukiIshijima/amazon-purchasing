@@ -1,8 +1,8 @@
 plugins {
-  kotlin("kapt")
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
   id("com.google.dagger.hilt.android")
+  id("com.google.devtools.ksp")
 }
 
 // If release build, please disable comment out.
@@ -90,7 +90,7 @@ dependencies {
 //  implementation("com.github.TatsukiIshijima.amazon-purchasing:core:develop-SNAPSHOT")
   implementation(project(":feature"))
 //  implementation("com.github.TatsukiIshijima.amazon-purchasing:feature:develop-SNAPSHOT")
-  kapt("com.google.dagger:hilt-android-compiler:2.44")
+  ksp("com.google.dagger:hilt-android-compiler:2.56.2")
   testImplementation(project(":fake"))
 //  implementation("com.github.TatsukiIshijima.amazon-purchasing:fake:develop-SNAPSHOT")
   testImplementation("junit:junit:4.13.2")
@@ -100,8 +100,4 @@ dependencies {
   androidTestImplementation("androidx.compose.ui:ui-test-junit4")
   debugImplementation("androidx.compose.ui:ui-tooling")
   debugImplementation("androidx.compose.ui:ui-test-manifest")
-}
-
-kapt {
-  correctErrorTypes = true
 }
